@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Hanzi Blaster</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<style>
+ html,body{margin:0;min-height:100%}
+ body{background:radial-gradient(ellipse at 50% 0%,#1b1f5e 0%,#0b0d2e 55%,#04050f 100%) fixed;color:#e8ecff;font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:10px 12px 28px;overflow-x:hidden;user-select:none;-webkit-user-select:none}
+ #stars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+ .star{position:absolute;top:-10px;background:#fff;border-radius:50%}
+ @keyframes fall{from{transform:translateY(0)}to{transform:translateY(115vh)}}
+ @keyframes twinkle{from{opacity:.25}to{opacity:1}}
+ #app{position:relative;z-index:1;width:100%;max-width:420px}
+ .top{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+ .top a{color:#7df9ff;text-decoration:none}
+ .top b{letter-spacing:2px;color:#ffd166;text-shadow:0 0 10px #ff9f1c}
+ #score{font-weight:700;color:#7df9ff;min-width:60px;text-align:right}
+ .hud{display:flex;justify-content:space-between;margin:6px 0 8px;font-size:15px}
+ #wave{color:#b8c0ff}
+ #stage{position:relative;height:244px;border-radius:14px;border:2px solid #2d3a8c;background:rgba(10,12,50,.55);overflow:hidden}
+ .alien{position:absolute;top:10px;left:50%;margin-left:-36px;width:72px;text-align:center;animation:driftA 5s ease-in-out infinite alternate}
+ @keyframes driftA{from{transform:translateX(-95px)}to{transform:translateX(95px)}}
+ @keyframes driftB{from{transform:translateX(75px)}to{transform:translateX(-75px)}}
+ .bob{animation:bob 1.6s ease-in-out infinite alternate}
+ @keyframes bob{from{transform:translateY(-5px)}to{transform:translateY(5px)}}
+ .alien .fx span{display:block;font-size:58px;line-height:1;filter:drop-shadow(0 0 12px #ff4d6d)}
+ .hp{height:6px;width:64px;margin:4px auto 0;background:#3a1020;border-radius:4px;overflow:hidden}
+ .hp i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4d6d,#ffb703);transition:width .25s}
+ .ship{position:absolute;bottom:6px;left:50%;margin-left:-30px;width:60px;text-align:center;animation:driftB 4s ease-in-out infinite alternate}
+ .rocket{display:inline-block;transform:rotate(-45deg);font-size:50px;line-height:1;filter:drop-shadow(0 0 10px #00e5ff)}
+ .flame{width:10px;height:14px;margin:-2px auto 0;border-radius:50% 50% 60% 60%;background:linear-gradient(#fff,#ffb703,#ff4d6d);animation:flick .12s infinite alternate}
+ @keyframes flick{from{transform:scaleY(.6)}to{transform:scaleY(1.3)}}
+ #bubble{position:absolute;left:50%;top:94px;transform:translateX(-50%) scale(.92);width:calc(100% - 24px);max-width:380px;box-sizing:border-box;padding:7px 12px;border-radius:12px;background:rgba(25,10,45,.93);border:2px solid #ff4d6d;font-size:14px;line-height:1.3;text-align:center;opacity:0;transition:opacity .2s,transform .2s;z-index:5;pointer-events:none}
+ #bubble.show{opacity:1;transform:translateX(-50%) scale(1)}
+ #bubble.good{border-color:#00e5ff}
+ .proj{position:absolute;z-index:6;pointer-events:none}
+ .laser{width:5px;height:30px;border-radius:4px;background:linear-gradient(#fff,#00e5ff);box-shadow:0 0 10px #00e5ff,0 0 20px #00e5ff}
+ .laser.big{width:12px;height:48px;box-shadow:0 0 16px #00e5ff,0 0 34px #7df9ff}
+ .bolt{width:14px;height:14px;border-radius:50%;background:radial-gradient(#fff,#ff4d6d);box-shadow:0 0 12px #ff4d6d,0 0 24px #ff4d6d}
+ .boom{position:absolute;z-index:7;pointer-events:none;line-height:1}
+ .spark{position:absolute;width:6px;height:6px;border-radius:50%;z-index:7;pointer-events:none}
+ .pop{position:absolute;z-index:8;pointer-events:none;font-weight:800;font-size:22px;color:#ffd166;text-shadow:0 0 8px #000}
+ #board{margin:10px auto 0;background:rgba(8,10,40,.78);border:2px solid #00e5ff;border-radius:14px;box-shadow:0 0 18px rgba(0,229,255,.35);touch-action:none}
+ #board svg{touch-action:none;display:block}
+ #status{text-align:center;min-height:24px;margin-top:8px;font-weight:600;color:#b8c0ff}
+ #overlay{position:fixed;inset:0;z-index:20;background:rgba(2,3,16,.82);display:flex;align-items:center;justify-content:center;padding:20px}
+ #overlay.hidden{display:none}
+ .card{max-width:340px;text-align:center;background:#12154a;border:2px solid #00e5ff;border-radius:16px;padding:22px;box-shadow:0 0 30px rgba(0,229,255,.4)}
+ .card h2{margin:0 0 8px;color:#ffd166}
+ .card p{margin:6px 0 14px;color:#cfd6ff;line-height:1.4}
+ .card button{font-size:17px;font-weight:700;padding:10px 22px;border:0;border-radius:10px;background:#00e5ff;color:#04050f;cursor:pointer}
+ .card a{display:block;margin-top:12px;color:#7df9ff}
+</style></head><body>
+<div id="stars"></div>
+<div id="app">
+ <div class="top"><a href="/">← Practice</a><b>HANZI BLASTER</b><span id="score">0</span></div>
+ <div class="hud"><span id="hearts"></span><span id="wave"></span></div>
+ <div id="stage">
+  <div class="alien" id="alien"><div class="bob"><div class="fx" id="alienFx"><span id="alienEmoji">👾</span></div></div><div class="hp"><i id="hpFill"></i></div></div>
+  <div class="ship" id="ship"><div class="bob"><div class="fx" id="shipFx"><span class="rocket">🚀</span><div class="flame"></div></div></div></div>
+  <div id="bubble"></div>
+ </div>
+ <div id="board"></div>
+ <div id="status"></div>
+</div>
+<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><p id="ovBody"></p><button id="ovBtn"></button><a href="/">← Back to practice</a></div></div>
+<script>
+const STARTER=Array.from("人大天口日月木水火山你好我他中国学书写永");
+const ALIENS=['👾','👽','🛸','🤖','👹'];
+const MAX_HEARTS=5;
+const TAUNTS=['Hahaha, Earthling!','Pathetic!','My pet slug writes better!','Is that your best?','Bzzzt, wrong!','Your ink is weak!'];
+const GENERIC=['That stroke was off. Slow down and trace the outline!','Wrong path! Follow the stroke order.','Not even close. Watch the outline!'];
+const $=id=>document.getElementById(id);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+let user='';try{user=localStorage.getItem('hz_user')||''}catch(e){}
+user=user||'guest';
+let queue=[],score=0,hearts=MAX_HEARTS,wave=0,writer=null,characterData=null,current='',mistakes=[],details=[],strokeReplay=[],totalStrokes=1,alive=false,loadId=0,bubbleTimer=null;
+const cache=new Map();
+
+/* ---------- starfield ---------- */
+(function(){
+  const box=$('stars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div'),size=1+Math.random()*2.2,fall=6+Math.random()*14;
+    s.className='star';
+    s.style.cssText='left:'+(Math.random()*100)+'%;width:'+size+'px;height:'+size+'px;opacity:'+(.3+Math.random()*.7)+';animation:fall '+fall+'s linear -'+(Math.random()*fall)+'s infinite,twinkle '+(1+Math.random()*2)+'s ease-in-out infinite alternate';
+    box.appendChild(s);
+  }
+})();
+
+/* ---------- stroke diagnosis (same logic as the practice page) ---------- */
+function pointsXY(points){
+  return (points||[]).map(p=>Array.isArray(p)?[Number(p[0]),Number(p[1])]:[Number(p.x),Number(p.y)])
+    .filter(p=>p.every(Number.isFinite));
+}
+function resample(points,count=20){
+  if(points.length<2)return [];
+  const lengths=[0];
+  for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+Math.hypot(points[i][0]-points[i-1][0],points[i][1]-points[i-1][1]));
+  const total=lengths[lengths.length-1];if(total<1)return [];
+  const out=[];let seg=1;
+  for(let i=0;i<count;i++){
+    const target=total*i/(count-1);
+    while(seg<lengths.length-1&&lengths[seg]<target)seg++;
+    const a=points[seg-1],b=points[seg],span=lengths[seg]-lengths[seg-1];
+    const f=span?(target-lengths[seg-1])/span:0;
+    out.push([a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]);
+  }
+  return out;
+}
+function pathError(drawn,median,reverse=false){
+  let expected=pointsXY(median);if(reverse)expected=expected.reverse();
+  const a=resample(pointsXY(drawn)),b=resample(expected);
+  if(a.length<2||b.length<2)return Infinity;
+  let sum=0;for(let i=0;i<a.length;i++)sum+=Math.hypot(a[i][0]-b[i][0],a[i][1]-b[i][1]);
+  return sum/a.length/900;
+}
+function diagnoseStroke(strokeNum,drawnPoints,data){
+  if(!data||!data.medians||!drawnPoints||strokeNum>=data.medians.length)return '';
+  const scores=data.medians.map((median,i)=>({i,forward:pathError(drawnPoints,median),reverse:pathError(drawnPoints,median,true)}));
+  const current=scores[strokeNum],maxError=0.14,margin=0.035;
+  const bestOther=scores.filter(s=>s.i!==strokeNum).sort((a,b)=>Math.min(a.forward,a.reverse)-Math.min(b.forward,b.reverse))[0];
+  if(current.reverse<=maxError&&current.reverse+margin<current.forward&&
+      (!bestOther||Math.min(bestOther.forward,bestOther.reverse)>current.reverse+margin))return 'reversed_'+(strokeNum+1);
+  const future=scores.filter(s=>s.i>strokeNum).sort((a,b)=>a.forward-b.forward);
+  const best=future[0],second=future[1];
+  if(best&&best.forward<=maxError&&best.forward+margin<Math.min(current.forward,current.reverse)&&
+      (!second||second.forward>best.forward+margin))return 'order_'+(strokeNum+1)+'_'+(best.i+1);
+  return '';
+}
+function strokeDescription(index,data){
+  const path=pointsXY(data.medians[index]||[]);if(path.length<2)return 'stroke '+(index+1)+' of '+data.medians.length;
+  const first=path[0],last=path[path.length-1],all=data.medians.flatMap(pointsXY);
+  const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  const region=p=>{
+    const x=(p[0]-minX)/(maxX-minX||1),y=1-(p[1]-minY)/(maxY-minY||1);
+    const col=x<.34?'left':x>.66?'right':'center',row=y<.34?'upper':y>.66?'lower':'middle';
+    if(row==='middle'&&col==='center')return 'center';
+    if(row==='middle')return col;
+    if(col==='center')return row;
+    return row+'-'+col;
+  };
+  const dx=last[0]-first[0],screenDy=first[1]-last[1];
+  const kind=Math.abs(dx)>=Math.abs(screenDy)*1.8?'horizontal':Math.abs(screenDy)>=Math.abs(dx)*1.8?'vertical':dx<0?'left-falling diagonal':'right-falling diagonal';
+  return 'stroke '+(index+1)+' of '+data.medians.length+' ('+region(path[Math.floor(path.length/2)])+' '+kind+')';
+}
+function endpointRegion(point,data){
+  const all=data.medians.flatMap(pointsXY),xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+  const x=(point[0]-Math.min(...xs))/(Math.max(...xs)-Math.min(...xs)||1),y=1-(point[1]-Math.min(...ys))/(Math.max(...ys)-Math.min(...ys)||1);
+  return (y<.34?'upper':y>.66?'lower':'middle')+'-'+(x<.34?'left':x>.66?'right':'center');
+}
+function diagnosisText(code,data){
+  let m=code.match(/^reversed_(\d+)$/);
+  if(m){
+    const i=Number(m[1])-1,path=pointsXY(data.medians[i]||[]);
+    if(path.length<2)return 'You drew '+strokeDescription(i,data)+' backwards.';
+    return 'You drew '+strokeDescription(i,data)+' backwards. Start at the '+endpointRegion(path[0],data)+' end and move to the '+endpointRegion(path[path.length-1],data)+' end.';
+  }
+  m=code.match(/^order_(\d+)_(\d+)$/);
+  if(m){const expected=Number(m[1])-1,drawn=Number(m[2])-1;
+    return strokeDescription(drawn,data)+' came too early. Draw '+strokeDescription(expected,data)+' first.';
+  }
+  return '';
+}
+function habitKind(points){
+  const p=pointsXY(points);if(p.length<2)return 'other';
+  const dx=Math.abs(p[p.length-1][0]-p[0][0]),dy=Math.abs(p[p.length-1][1]-p[0][1]);
+  if(dx<1&&dy<1)return 'other';
+  if(dx>=dy*1.8)return 'horizontal';
+  if(dy>=dx*1.8)return 'vertical';
+  return 'diagonal';
+}
+function habitForDiagnosis(code,data){
+  const ok=k=>['horizontal','vertical','diagonal'].includes(k);
+  let m=code.match(/^order_(\d+)_(\d+)$/);
+  if(m){const e=habitKind(data.medians[Number(m[1])-1]),d=habitKind(data.medians[Number(m[2])-1]);return ok(e)&&ok(d)?'order_'+d+'_before_'+e:''}
+  m=code.match(/^reversed_(\d+)$/);
+  if(m){const k=habitKind(data.medians[Number(m[1])-1]);return ok(k)?'reversed_'+k:''}
+  return '';
+}
+
+/* ---------- effects ---------- */
+function center(el){
+  const s=$('stage').getBoundingClientRect(),r=el.getBoundingClientRect();
+  return {x:r.left+r.width/2-s.left,y:r.top+r.height/2-s.top};
+}
+function shoot(fromEl,toEl,cls,done){
+  const a=center(fromEl),b=center(toEl),dx=b.x-a.x,dy=b.y-a.y,ang=Math.atan2(dy,dx)-Math.PI/2;
+  const p=document.createElement('div');p.className='proj '+cls;
+  p.style.left=a.x+'px';p.style.top=a.y+'px';
+  $('stage').appendChild(p);
+  const anim=p.animate([
+    {transform:'translate(-50%,-50%) rotate('+ang+'rad)'},
+    {transform:'translate('+dx+'px,'+dy+'px) translate(-50%,-50%) rotate('+ang+'rad)'}
+  ],{duration:Math.max(180,Math.hypot(dx,dy)*1.1),easing:'ease-in'});
+  anim.onfinish=()=>{p.remove();if(done)done()};
+}
+function explode(el,big){
+  const c=center(el),st=$('stage');
+  const b=document.createElement('div');b.className='boom';b.textContent='💥';
+  b.style.left=c.x+'px';b.style.top=c.y+'px';b.style.fontSize=(big?70:36)+'px';
+  st.appendChild(b);
+  b.animate([{transform:'translate(-50%,-50%) scale(.3)',opacity:1},
+    {transform:'translate(-50%,-50%) scale('+(big?1.6:1.2)+')',opacity:0}],
+    {duration:big?700:380,easing:'ease-out'}).onfinish=()=>b.remove();
+  const n=big?26:10,colors=['#ffd166','#ff4d6d','#00e5ff','#ffffff'];
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div');d.className='spark';
+    d.style.left=c.x+'px';d.style.top=c.y+'px';d.style.background=colors[i%4];
+    st.appendChild(d);
+    const ang=Math.random()*Math.PI*2,dist=(big?70:35)+Math.random()*(big?70:30);
+    d.animate([{transform:'translate(0,0)',opacity:1},
+      {transform:'translate('+Math.cos(ang)*dist+'px,'+Math.sin(ang)*dist+'px)',opacity:0}],
+      {duration:500+Math.random()*400,easing:'ease-out'}).onfinish=()=>d.remove();
+  }
+}
+function shake(el){
+  el.animate([{transform:'translateX(0)'},{transform:'translateX(-9px)'},{transform:'translateX(9px)'},
+    {transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:380});
+  el.animate([{filter:'brightness(3)'},{filter:'none'}],{duration:380});
+}
+function popText(text,el){
+  const c=center(el),d=document.createElement('div');d.className='pop';d.textContent=text;
+  d.style.left=(c.x-20)+'px';d.style.top=(c.y-10)+'px';$('stage').appendChild(d);
+  d.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-50px)',opacity:0}],{duration:900,easing:'ease-out'}).onfinish=()=>d.remove();
+}
+function say(text,kind){
+  const b=$('bubble');b.textContent=text;b.className='show '+(kind||'');
+  clearTimeout(bubbleTimer);bubbleTimer=setTimeout(()=>{b.className=''},4500);
+}
+function setHp(f){$('hpFill').style.width=Math.max(0,Math.min(1,f))*100+'%'}
+function renderHud(){
+  $('hearts').textContent='❤️'.repeat(Math.max(0,hearts))+'🖤'.repeat(Math.max(0,MAX_HEARTS-hearts));
+  $('score').textContent=score;
+  $('wave').textContent=wave?'Wave '+wave:'';
+}
+
+/* ---------- game flow ---------- */
+function showOverlay(title,body,btn,fn){
+  $('ovTitle').textContent=title;$('ovBody').textContent=body;
+  const b=$('ovBtn');b.textContent=btn;b.onclick=fn;$('overlay').classList.remove('hidden');
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function nextChar(){
+  if(!queue.length)queue=shuffle(STARTER);
+  return queue.shift();
+}
+async function startGame(){
+  $('overlay').classList.add('hidden');
+  score=0;hearts=MAX_HEARTS;wave=0;alive=true;
+  $('ship').style.visibility='visible';
+  if(writer){try{writer.cancelQuiz()}catch(e){}}
+  queue=[];
+  try{
+    const r=await (await fetch('/api/practice/?user='+encodeURIComponent(user))).json();
+    const mine=(r.chars||[]).filter(c=>c&&c.length===1);
+    queue=mine.concat(shuffle(STARTER.filter(c=>!mine.includes(c))));
+  }catch(e){queue=shuffle(STARTER)}
+  renderHud();
+  spawnAlien();
+}
+async function spawnAlien(){
+  if(!alive)return;
+  wave++;renderHud();
+  current=nextChar();mistakes=[];details=[];strokeReplay=[];
+  const myLoad=++loadId;
+  $('alienEmoji').textContent=ALIENS[(wave-1)%ALIENS.length];
+  $('alien').style.visibility='visible';
+  $('alienFx').animate([{transform:'translateY(-130px) scale(.5)',opacity:0},{transform:'none',opacity:1}],{duration:550,easing:'ease-out'});
+  setHp(1);
+  const board=$('board');board.innerHTML='';
+  const size=Math.max(240,Math.min(window.innerWidth-40,340,window.innerHeight-380));
+  board.style.width=size+'px';board.style.height=size+'px';
+  $('status').textContent='Loading stroke data…';
+  try{characterData=cache.get(current)||await HanziWriter.loadCharacterData(current);cache.set(current,characterData)}
+  catch(e){$('status').textContent='Could not load stroke data. Check your connection and reload.';return}
+  if(myLoad!==loadId||!alive)return;
+  totalStrokes=characterData.medians.length||1;
+  say('Write '+current+' or be vaporized, Earthling!','');
+  $('status').textContent='Draw stroke 1 to fire!';
+  writer=HanziWriter.create('board',current,{width:size,height:size,padding:15,showOutline:true,showCharacter:false,
+    outlineColor:'#2d3a8c',strokeColor:'#00e5ff',drawingColor:'#ffffff',drawingWidth:5,
+    charDataLoader:()=>characterData});
+  writer.quiz({onMistake,onCorrectStroke,onComplete});
+}
+function onMistake(s){
+  if(!alive)return;
+  const stroke=s.strokeNum+1;mistakes.push(stroke);
+  const points=s.drawnPath&&s.drawnPath.points||[];
+  const diagnosis=diagnoseStroke(s.strokeNum,points,characterData);
+  details.push({stroke,size:900,points,diagnosis,habit:habitForDiagnosis(diagnosis,characterData)});
+  strokeReplay.push({stroke,correct:false,size:900,points,diagnosis});
+  const reason=diagnosis?diagnosisText(diagnosis,characterData):'';
+  say(pick(TAUNTS)+' '+(reason||pick(GENERIC)),'');
+  hearts--;renderHud();
+  $('status').textContent='✗ Stroke '+stroke+' — the alien fires back!';
+  const dead=hearts<=0;
+  if(dead){alive=false;try{writer.cancelQuiz()}catch(e){}}
+  shoot($('alienEmoji'),$('shipFx'),'bolt',()=>{
+    if(dead){
+      explode($('shipFx'),true);$('ship').style.visibility='hidden';
+      setTimeout(gameOver,1000);
+    }else{shake($('shipFx'));explode($('shipFx'),false)}
+  });
+}
+function onCorrectStroke(s){
+  if(!alive)return;
+  const points=s.drawnPath&&s.drawnPath.points||[];
+  strokeReplay.push({stroke:s.strokeNum+1,correct:true,size:900,points});
+  if(s.strokesRemaining>0){
+    setHp(s.strokesRemaining/totalStrokes);
+    $('status').textContent='✓ Direct hit! Next stroke';
+    shoot($('shipFx'),$('alienEmoji'),'laser',()=>{shake($('alienFx'));explode($('alienEmoji'),false)});
+  }
+}
+function onComplete(){
+  if(!alive)return;
+  setHp(0);
+  const perfect=mistakes.length===0;
+  const gain=10*totalStrokes+(perfect?25:0);
+  score+=gain;if(hearts<MAX_HEARTS)hearts++;
+  renderHud();
+  $('status').textContent=perfect?'💥 Flawless blast!':'💥 Alien destroyed!';
+  say(perfect?'NOOO! Flawless strokes! My ship!':'Argh! You got me... this time!','good');
+  shoot($('shipFx'),$('alienEmoji'),'laser big',()=>{
+    explode($('alienEmoji'),true);popText('+'+gain,$('alienEmoji'));
+    $('alien').style.visibility='hidden';
+  });
+  fetch('/api/log/',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({user,character:current,mistakes,details,replay:strokeReplay,completed:true})}).catch(()=>{});
+  setTimeout(spawnAlien,1900);
+}
+function gameOver(){
+  let best=0;
+  try{best=Number(localStorage.getItem('hz_best')||0);if(score>best){best=score;localStorage.setItem('hz_best',String(best))}}catch(e){}
+  showOverlay('SHIP DESTROYED 💥','You blasted '+Math.max(0,wave-1)+' alien(s). Score: '+score+'. Best: '+Math.max(best,score)+'.','Play again',startGame);
+}
+renderHud();
+showOverlay('🚀 HANZI BLASTER','Aliens are attacking! Write each character stroke by stroke to blast them. Mess up and they fire back and tell you exactly what you did wrong.','Launch!',startGame);
+</script></body></html>
