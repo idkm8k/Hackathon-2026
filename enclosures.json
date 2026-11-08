@@ -1,0 +1,4682 @@
+[
+ {
+  "model": "coach.enclosurechar",
+  "pk": "㢆",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "㢟",
+  "fields": {
+   "family": "walk",
+   "frame_component": "廴",
+   "pattern": "IIIWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "䧹",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "仄",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "円",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "冈",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "冋",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "冏",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "凶",
+  "fields": {
+   "family": "cup",
+   "frame_component": "凵",
+   "pattern": "IIWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "凼",
+  "fields": {
+   "family": "cup",
+   "frame_component": "凵",
+   "pattern": "IIIIWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "凿",
+  "fields": {
+   "family": "cup",
+   "frame_component": "凵",
+   "pattern": "IIIIIIIIIIWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "勺",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFI"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "勻",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "勾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "勿",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "包",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匈",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匊",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匋",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匍",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匛",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匝",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匠",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匡",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匣",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匦",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匧",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匪",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匭",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匮",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匯",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匱",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匹",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "区",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "医",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匽",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匾",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "匿",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "區",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匸",
+   "pattern": "FIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厄",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厅",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "历",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厉",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "压",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厌",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厍",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厓",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厕",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厗",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厘",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厝",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "原",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厢",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厣",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厤",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厥",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厦",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厨",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厩",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厪",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厭",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厮",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "厲",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "反",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "口",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "句",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "叵",
+  "fields": {
+   "family": "side_box",
+   "frame_component": "匚",
+   "pattern": "FIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "同",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "周",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "唐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囚",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "四",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囝",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "回",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "因",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囡",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "团",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囤",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囫",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "园",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "困",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "围",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囵",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囷",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囹",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "固",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "国",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "图",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "囿",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圂",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圃",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圄",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圆",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圇",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圈",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圉",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圊",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "國",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圍",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "園",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圓",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圖",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "團",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圙",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "圜",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIIIIIIIIIIIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "孱",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "尺",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFI"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "尻",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "尼",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "尾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "尿",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屁",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "层",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屃",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屄",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屆",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屈",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屉",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "届",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屋",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屌",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屍",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屎",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屑",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屙",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屚",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屜",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "属",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屠",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屡",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屢",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屣",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "層",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "履",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屦",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屨",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屬",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "屭",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "巡",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "席",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庀",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庄",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庆",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庇",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "床",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庋",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "序",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庑",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "库",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "应",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "底",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庖",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "店",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庙",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "府",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庞",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "废",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庠",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庥",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "度",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "座",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庫",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庭",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庳",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庵",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庶",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "康",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庸",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庹",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "庾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廁",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廂",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廄",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廈",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廉",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廊",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廑",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廒",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廓",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廖",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廚",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廛",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廝",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廟",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廠",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廡",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廢",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廣",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廥",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廨",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廩",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廪",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廬",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廳",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "廷",
+  "fields": {
+   "family": "walk",
+   "frame_component": "廴",
+   "pattern": "IIIIWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "建",
+  "fields": {
+   "family": "walk",
+   "frame_component": "廴",
+   "pattern": "IIIIIIWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "斤",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "日",
+  "fields": {
+   "family": "box",
+   "frame_component": "口",
+   "pattern": "FFIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "旬",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "暹",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "曰",
+  "fields": {
+   "family": "box",
+   "frame_component": "口",
+   "pattern": "FFIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "月",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "田",
+  "fields": {
+   "family": "box",
+   "frame_component": "囗",
+   "pattern": "FFIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "甸",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疔",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疖",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疗",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疙",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疚",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疝",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疠",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疡",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疣",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疤",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疥",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疫",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疬",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疭",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疮",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疯",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疰",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疱",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疲",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疳",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疴",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疵",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疸",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疹",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疼",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疽",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "疾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痂",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痃",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痄",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "病",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "症",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痈",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痊",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痍",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痒",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痔",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痕",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痖",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痘",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痙",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痛",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痞",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痢",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痣",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痤",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痦",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痧",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痨",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痪",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痫",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痰",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痱",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痲",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痴",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痹",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痺",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痼",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "痿",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘀",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘁",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘃",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘅",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘊",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘋",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘌",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘓",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘕",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘗",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘘",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘙",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘛",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘜",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘟",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘠",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘡",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘢",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘤",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘥",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘦",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘧",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘩",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘪",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘫",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘭",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘰",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘲",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘳",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘴",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘵",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘸",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘼",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "瘿",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癀",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "療",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癃",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癆",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癇",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癉",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癌",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癍",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癒",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癔",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癖",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癘",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癜",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癞",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癟",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癡",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癢",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癣",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癥",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癧",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癩",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癫",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癬",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癮",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癯",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癰",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癱",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "癲",
+  "fields": {
+   "family": "roof",
+   "frame_component": "疒",
+   "pattern": "FFFFFIIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "目",
+  "fields": {
+   "family": "box",
+   "frame_component": "口",
+   "pattern": "FFIIC"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "盾",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "石",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "网",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "羼",
+  "fields": {
+   "family": "roof",
+   "frame_component": "尸",
+   "pattern": "FFFIIIIIIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "腐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "虒",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "见",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "訇",
+  "fields": {
+   "family": "roof",
+   "frame_component": "勹",
+   "pattern": "FFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "訚",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "贝",
+  "fields": {
+   "family": "door",
+   "frame_component": "冂",
+   "pattern": "FFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "质",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "边",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "辽",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "达",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迁",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迂",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迄",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迅",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "过",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迈",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迎",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "运",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "近",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迓",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "返",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迕",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "还",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "这",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "进",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "远",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "违",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "连",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迟",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迢",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迥",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迦",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迨",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迩",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迪",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迫",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迭",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迮",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "述",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迴",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迶",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迷",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迸",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "迹",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "追",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "退",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "送",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "适",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逃",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逄",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逅",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逆",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "选",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逊",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逋",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逍",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "透",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逐",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逑",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "递",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "途",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逕",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逖",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逗",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "這",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "通",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逛",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逝",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逞",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "速",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "造",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逡",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逢",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "連",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逦",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逭",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逮",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逯",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "週",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "進",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逵",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逶",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逸",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逻",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逼",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "逾",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遁",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遂",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遄",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遇",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遊",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "運",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遍",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "過",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遏",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遐",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遑",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遒",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "道",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "達",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "違",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遗",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遘",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遙",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遛",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遜",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遞",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遠",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遢",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遣",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遥",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遨",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "適",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遭",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遮",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遲",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遴",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遵",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遷",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "選",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遺",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遼",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "遽",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "避",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邀",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邁",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邂",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邃",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "還",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邇",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邈",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邊",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邋",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "邏",
+  "fields": {
+   "family": "walk",
+   "frame_component": "辶",
+   "pattern": "IIIIIIIIIIIIIIIIIIIWWW"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闩",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFI"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闪",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闫",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闭",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "问",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闯",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闰",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闱",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闲",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闳",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "间",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闵",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闶",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闷",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闸",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闹",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闺",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闻",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闼",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闽",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "闾",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阀",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阁",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阂",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阃",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阄",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阅",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阆",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阇",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阈",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阉",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阊",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阋",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阌",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阍",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阎",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阏",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阐",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阑",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阒",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阔",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阕",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阖",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阗",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阙",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "阚",
+  "fields": {
+   "family": "door",
+   "frame_component": "门",
+   "pattern": "FFFIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "雁",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "鴈",
+  "fields": {
+   "family": "roof",
+   "frame_component": "厂",
+   "pattern": "FFIIIIIIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "麻",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIII"
+  }
+ },
+ {
+  "model": "coach.enclosurechar",
+  "pk": "龐",
+  "fields": {
+   "family": "roof",
+   "frame_component": "广",
+   "pattern": "FFFIIIIIIIIIIIIIIII"
+  }
+ }
+]

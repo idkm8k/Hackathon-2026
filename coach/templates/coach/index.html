@@ -181,12 +181,13 @@ async function start(){
   document.getElementById('plan').textContent='Checking your practice plan…';
   const r=await (await fetch('/api/practice/?user='+encodeURIComponent(user))).json();
   let matched=[];
-  if(r.recurring&&r.habit_code){document.getElementById('plan').textContent='Finding new characters for your '+r.habit.toLowerCase()+' pattern…';matched=await matchingPracticeChars(r)}
+  if(!r.enclosure_rule&&r.recurring&&r.habit_code){document.getElementById('plan').textContent='Finding new characters for your '+r.habit.toLowerCase()+' pattern…';matched=await matchingPracticeChars(r)}
   const unique=a=>[...new Set(a)];
-  const chars=unique(matched.concat(r.habit_chars||[],r.chars)).slice(0,6);
+  const chars=(r.enclosure_rule?unique((r.chars||[]).concat(r.enclosure_rule_chars||[],r.habit_chars||[])):unique(matched.concat(r.habit_chars||[],r.chars))).slice(0,6);
   const weak=unique(matched.concat(r.habit_chars||[],r.weak)).slice(0,6);
-  document.getElementById('plan').textContent=r.habit?
-    (r.recurring?(matched.length?'Today\'s plan adds new characters for your recurring '+r.habit.toLowerCase()+' pattern (red).':'Today\'s plan reviews characters tied to your recurring '+r.habit.toLowerCase()+' pattern (red).'):
+  document.getElementById('plan').textContent=r.enclosure_rule_name?
+    (r.enclosure_rule_recurring?'Today\'s plan reviews '+r.enclosure_rule_name.toLowerCase()+' in '+(r.enclosure_rule_chars||[]).join('、')+'.':'Today\'s plan starts with your '+r.enclosure_rule_name.toLowerCase()+' pattern.'):
+    r.habit?(r.recurring?(matched.length?'Today\'s plan adds new characters for your recurring '+r.habit.toLowerCase()+' pattern (red).':'Today\'s plan reviews characters tied to your recurring '+r.habit.toLowerCase()+' pattern (red).'):
       'We\'ve seen a possible '+r.habit.toLowerCase()+' issue once; today\'s plan reviews it (red).'):
     (weak.length?'Welcome back, '+user+'! Today\'s plan reviews characters with repeated errors (red).':'Hi '+user+'! Let\'s start practicing.');
   const box=document.getElementById('chars');box.innerHTML='';
@@ -224,13 +225,22 @@ async function load(ch){
 async function finish(){
   document.getElementById('status').textContent='Done! '+mistakes.length+' mistake(s)';
   const body=JSON.stringify({user,character:current,mistakes,details,completed:true});
-  await fetch('/api/log/',{method:'POST',body});
+  let logged=null;
+  try{logged=await (await fetch('/api/log/',{method:'POST',headers:{'Content-Type':'application/json'},body})).json()}catch(e){}
   let tip='';
   const diagnosed=details.find(d=>d.diagnosis);
   if(diagnosed)tip=diagnosisText(diagnosed.diagnosis,characterData);
   else if(mistakes.length)tip='Hanzi Writer marked a stroke incorrect, but I couldn’t confidently match your path to another stroke. Show stroke order, then retry.';
   if(!tip)return;
+  if(logged&&logged.rule_explanation)tip=logged.rule_explanation;
   const el=document.getElementById('tip');el.textContent=tip;el.style.display='block';
+  if(diagnosed&&logged&&logged.attempt_id){
+    try{
+      const response=await fetch('/api/explain/',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({user,attempt_id:logged.attempt_id})});
+      const result=await response.json();if(result.explanation){tip=result.explanation;el.textContent=tip}
+    }catch(e){}
+  }
   if(mistakes.length)say(tip);
 }
 async function say(text){

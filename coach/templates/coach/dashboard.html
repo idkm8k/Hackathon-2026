@@ -11,6 +11,14 @@
 <h1>{{ user }}’s learning profile</h1>
 <div class="muted">{{ total }} practice attempts · Based on mistakes Hanzi Coach could identify clearly</div>
 
+{% if enclosure_focus %}
+<section class="card focus">
+ <b>Your top enclosure rule: {{ enclosure_focus.label }}</b>
+ <div>Seen across {{ enclosure_focus.character_count }} character{{ enclosure_focus.character_count|pluralize }} in {{ enclosure_focus.count }} diagnosed mistakes.</div>
+ <p>Review: <span class="chars">{% for c in enclosure_focus.characters %}{{ c }}{% endfor %}</span></p>
+</section>
+{% endif %}
+
 {% if focus %}
 <section class="card focus">
  {% if focus.recurring %}
@@ -24,7 +32,19 @@
 </section>
 {% endif %}
 
-<h2>Patterns I’ve seen</h2>
+<h2>Enclosure rules I’ve seen</h2>
+{% for h in enclosure_rules %}
+<section class="card">
+ <h3>{{ h.label }}</h3>
+ {% if h.recurring %}<p>Seen across {{ h.character_count }} characters ({{ h.count }} diagnosed mistakes).</p>
+ {% else %}<p>Seen in one character so far; I’ll look for another example before calling it recurring.</p>{% endif %}
+ <div>{% for c in h.characters %}<span class="tag">{{ c }}</span>{% endfor %}</div>
+</section>
+{% empty %}
+<section class="card"><p>No enclosure-rule mistakes identified yet.</p></section>
+{% endfor %}
+
+<h2>Other patterns I’ve seen</h2>
 {% for h in habits %}
 <section class="card">
  <h3>{{ h.label }}</h3>
