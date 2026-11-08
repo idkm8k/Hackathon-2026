@@ -4,7 +4,7 @@ I'm an aspiring polyglot and Chinese is the fourth language I'm learning. Since 
 But stroke order isn't random. It follows rules and conventions, and if you learn the patterns, you can write a character of any difficulty, even one you've never seen. I wanted to make an app that doesn't just force you to memorize, but understand.
 
 # What it does
-Hanzi Coach is a stroke-order trainer that corrects your thinking, not just your strokes. It uses a data base of all your strokes, 12 hours of me hardcoding common pattern problems, and the Gemini API to make a personalized response that's adaptive to you.
+Hanzi Coach is a stroke-order trainer that adapts to your thinking, not just your strokes. It uses a data base of all your strokes, 12 hours of me hardcoding common pattern problems, and the Gemini API to make a personalized response that's adaptive to you.
 
 It's also gamified as an optional mode: land a correct stroke and you blast the enemy, make a mistake or run out of time and the enemy strikes back. They may ragebait you a little if you mess up.
 
