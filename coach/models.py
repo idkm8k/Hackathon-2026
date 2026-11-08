@@ -15,4 +15,5 @@ class StrokeMistake(models.Model):
     drawn_points = models.TextField(blank=True, default="[]")  # JSON list of [x, y]
     board_size = models.IntegerField(default=300)
     diagnosis = models.CharField(max_length=40, blank=True, default="")
+    habit = models.CharField(max_length=64, blank=True, default="", db_index=True)
     created = models.DateTimeField(auto_now_add=True)

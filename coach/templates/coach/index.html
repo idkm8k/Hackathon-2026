@@ -14,6 +14,9 @@
  .row{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;justify-content:center}
  .row button,.row input{padding:8px 14px;border-radius:8px;border:1px solid #bbb;background:#fff;cursor:pointer;font-size:15px}
  #status{min-height:24px;font-weight:600} #tip{max-width:420px;text-align:center;background:#fff;padding:12px 16px;border-radius:10px;border-left:4px solid #c0392b;display:none}
+ #askBox{max-width:460px;width:100%;background:#fff;padding:14px;border-radius:10px;box-sizing:border-box;display:none}
+ #askBox textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid #bbb;border-radius:8px;font:inherit}
+ #answer{white-space:pre-wrap;margin-top:10px}
  a{color:#c0392b}
 </style></head><body>
 <h1>Hanzi Coach 写</h1>
@@ -21,15 +24,25 @@
 <div class="row"><input id="user" placeholder="Your name"><button onclick="start()">Start</button>
  <a href="#" id="dash" target="_blank">My mistake profile →</a></div>
 <div class="sub" id="plan"></div>
+<div class="row"><input id="custom-character" maxlength="2" placeholder="Practice any Hanzi, e.g. 明" aria-label="Chinese character to practice">
+ <button onclick="practiceCustom()">Practice</button></div>
+<div class="sub" id="custom-status" aria-live="polite"></div>
 <div class="chars" id="chars"></div>
 <div id="board"></div>
 <div id="status"></div>
 <div class="row"><button onclick="writer&&writer.animateCharacter()">Show stroke order</button>
  <button onclick="say(current)">Hear it 🔊</button>
- <button onclick="load(current)">Retry</button></div>
+ <button onclick="load(current)">Retry</button><button onclick="showAsk()">Ask why?</button></div>
 <div id="tip"></div>
+<section id="askBox"><b>Ask about this stroke order</b>
+ <div class="sub">Gemini will use Hanzi Writer’s sequence as context.</div>
+ <textarea id="question" rows="2" maxlength="500" placeholder="Why does a vertical stroke come before a horizontal here?"></textarea>
+ <div class="row"><button id="askButton" onclick="askGemini()">Ask Gemini</button><button onclick="hideAsk()">Close</button></div>
+ <div id="answer" aria-live="polite"></div>
+</section>
 <script>
 let writer,current,mistakes=[],details=[],characterData=null,loadId=0,user=localStorage.getItem('hz_user')||'';
+const characterDataCache=new Map();
 function strokeKind(points){
   const p=pointsXY(points);if(p.length<2)return 'other';
   const dx=Math.abs(p[p.length-1][0]-p[0][0]),dy=Math.abs(p[p.length-1][1]-p[0][1]);
@@ -112,20 +125,74 @@ function diagnosisText(code,data){
   }
   return '';
 }
+function habitForDiagnosis(code,data){
+  let m=code.match(/^order_(\d+)_(\d+)$/);
+  if(m){
+    const expected=strokeKind(data.medians[Number(m[1])-1]),drawn=strokeKind(data.medians[Number(m[2])-1]);
+    return ['horizontal','vertical','diagonal'].includes(expected)&&['horizontal','vertical','diagonal'].includes(drawn)?'order_'+drawn+'_before_'+expected:'';
+  }
+  m=code.match(/^reversed_(\d+)$/);
+  if(m){const kind=strokeKind(data.medians[Number(m[1])-1]);return ['horizontal','vertical','diagonal'].includes(kind)?'reversed_'+kind:'';}
+  return '';
+}
+async function habitTagsForCharacter(ch){
+  const key='hz_habit_tags_'+ch;
+  try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(Array.isArray(saved))return saved}catch(e){}
+  try{
+    const data=await HanziWriter.loadCharacterData(ch);characterDataCache.set(ch,data);
+    const types=(data.medians||[]).map(strokeKind),tags=new Set();
+    types.forEach((type,i)=>{
+      if(['horizontal','vertical','diagonal'].includes(type))tags.add('reversed_'+type);
+      for(let j=i+1;j<types.length;j++)if(['horizontal','vertical','diagonal'].includes(type)&&['horizontal','vertical','diagonal'].includes(types[j]))
+        tags.add('order_'+types[j]+'_before_'+type);
+    });
+    const result=[...tags];localStorage.setItem(key,JSON.stringify(result));return result;
+  }catch(e){return []}
+}
+async function matchingPracticeChars(r){
+  const candidates=r.candidate_chars||[],found=[];
+  for(let i=0;i<candidates.length;i+=5){
+    const batch=await Promise.all(candidates.slice(i,i+5).map(async ch=>({ch,tags:await habitTagsForCharacter(ch)})));
+    for(const item of batch)if(item.tags.includes(r.habit_code))found.push(item.ch);
+    if(found.length>=2)break;
+  }
+  return found.slice(0,2);
+}
+async function practiceCustom(){
+  const value=document.getElementById('custom-character').value.trim(),chars=Array.from(value),status=document.getElementById('custom-status');
+  if(chars.length!==1||!/^\p{Script=Han}$/u.test(chars[0])){status.textContent='Enter one Chinese character, such as 明.';return}
+  const ch=chars[0];status.textContent='Checking Hanzi Writer stroke data for '+ch+'…';
+  try{
+    const data=characterDataCache.get(ch)||await HanziWriter.loadCharacterData(ch);
+    characterDataCache.set(ch,data);
+    const box=document.getElementById('chars');
+    let button=[...box.querySelectorAll('button')].find(b=>b.textContent===ch);
+    if(!button){button=document.createElement('button');button.className='custom';button.textContent=ch;button.onclick=()=>load(ch);box.appendChild(button)}
+    status.textContent='Loaded '+ch+'. Draw it to add this character to your practice history.';
+    load(ch);
+  }catch(e){status.textContent='I couldn’t find stroke data for '+ch+'. Try another character.'}
+}
 document.getElementById('user').value=user;
 if(user)start();
 async function start(){
   user=document.getElementById('user').value.trim()||'guest';
   localStorage.setItem('hz_user',user);
   document.getElementById('dash').href='/dashboard/?user='+encodeURIComponent(user);
+  document.getElementById('plan').textContent='Checking your practice plan…';
   const r=await (await fetch('/api/practice/?user='+encodeURIComponent(user))).json();
+  let matched=[];
+  if(r.recurring&&r.habit_code){document.getElementById('plan').textContent='Finding new characters for your '+r.habit.toLowerCase()+' pattern…';matched=await matchingPracticeChars(r)}
+  const unique=a=>[...new Set(a)];
+  const chars=unique(matched.concat(r.habit_chars||[],r.chars)).slice(0,6);
+  const weak=unique(matched.concat(r.habit_chars||[],r.weak)).slice(0,6);
   document.getElementById('plan').textContent=r.habit?
-    (r.recurring?'Today\'s plan reviews your recurring '+r.habit.toLowerCase()+' pattern (red).':'Today\'s plan reviews a '+r.habit.toLowerCase()+' issue we\'ve seen so far (red).'):
-    (r.weak.length?'Welcome back, '+user+'! Today\'s plan reviews characters with repeated errors (red).':'Hi '+user+'! Let\'s start practicing.');
+    (r.recurring?(matched.length?'Today\'s plan adds new characters for your recurring '+r.habit.toLowerCase()+' pattern (red).':'Today\'s plan reviews characters tied to your recurring '+r.habit.toLowerCase()+' pattern (red).'):
+      'We\'ve seen a possible '+r.habit.toLowerCase()+' issue once; today\'s plan reviews it (red).'):
+    (weak.length?'Welcome back, '+user+'! Today\'s plan reviews characters with repeated errors (red).':'Hi '+user+'! Let\'s start practicing.');
   const box=document.getElementById('chars');box.innerHTML='';
-  r.chars.forEach(c=>{const b=document.createElement('button');b.textContent=c;
-    if(r.weak.includes(c))b.className='weak';b.onclick=()=>load(c);box.appendChild(b)});
-  load(r.chars[0]);
+  chars.forEach(c=>{const b=document.createElement('button');b.textContent=c;
+    if(weak.includes(c))b.className='weak';b.onclick=()=>load(c);box.appendChild(b)});
+  load(chars[0]);
 }
 async function load(ch){
   const thisLoad=++loadId;
@@ -138,7 +205,7 @@ async function load(ch){
   const size=Math.min(window.innerWidth-48,360);
   const bd=document.getElementById('board');bd.style.width=size+'px';bd.style.height=size+'px';
   document.getElementById('status').textContent='Loading stroke data…';
-  try{characterData=await HanziWriter.loadCharacterData(ch)}catch(e){
+  try{characterData=characterDataCache.get(ch)||await HanziWriter.loadCharacterData(ch);characterDataCache.set(ch,characterData)}catch(e){
     if(thisLoad===loadId)document.getElementById('status').textContent='Could not load stroke data. Check your connection and retry.';
     return;
   }
@@ -148,7 +215,8 @@ async function load(ch){
   writer.quiz({
     onMistake:s=>{const stroke=s.strokeNum+1;mistakes.push(stroke);
       const points=s.drawnPath&&s.drawnPath.points||[];
-      details.push({stroke,size:900,points,diagnosis:diagnoseStroke(s.strokeNum,points,characterData)});
+      const diagnosis=diagnoseStroke(s.strokeNum,points,characterData);
+      details.push({stroke,size:900,points,diagnosis,habit:habitForDiagnosis(diagnosis,characterData)});
       document.getElementById('status').textContent='✗ Stroke '+(s.strokeNum+1)+' — try again'},
     onCorrectStroke:s=>{document.getElementById('status').textContent='✓ Nice! Next stroke'},
     onComplete:finish});
@@ -169,5 +237,28 @@ async function say(text){
   try{const r=await fetch('/api/tts/?text='+encodeURIComponent(text));
     if(r.status!==200)return;
     new Audio(URL.createObjectURL(await r.blob())).play();}catch(e){}
+}
+function showAsk(){
+  document.getElementById('askBox').style.display='block';
+  document.getElementById('answer').textContent='';
+  document.getElementById('question').focus();
+}
+function hideAsk(){document.getElementById('askBox').style.display='none'}
+async function askGemini(){
+  const question=document.getElementById('question').value.trim(),answer=document.getElementById('answer'),button=document.getElementById('askButton');
+  if(!current||!question){answer.textContent='Type a question about this character first.';return}
+  button.disabled=true;answer.textContent='Asking Gemini…';
+  try{
+    const stroke_order=(characterData.medians||[]).map((_,i)=>strokeDescription(i,characterData));
+    let response;
+    try{response=await fetch('/api/ask/',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({character:current,question,stroke_order})})}
+    catch(e){answer.textContent='I couldn’t contact the Hanzi Coach server. Check that Django is running, then refresh this page.';return}
+    let result;
+    try{result=await response.json()}
+    catch(e){answer.textContent='The app server returned an unexpected page (HTTP '+response.status+'). Restart Django from the Hanzi Coach project folder, then refresh.';return}
+    answer.textContent=result.answer||'The app returned no answer (HTTP '+response.status+'). Try again.';
+  }catch(e){answer.textContent='I couldn’t prepare the stroke details for Gemini. Reload the character and try again.'}
+  finally{button.disabled=false}
 }
 </script></body></html>

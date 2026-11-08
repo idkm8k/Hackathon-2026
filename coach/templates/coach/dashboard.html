@@ -37,9 +37,9 @@
 <section class="card"><p>No clear order or direction pattern yet. Keep practicing; I’ll only add a pattern when I can match a drawn stroke to Hanzi Writer’s stroke data.</p></section>
 {% endfor %}
 
-<h2>Today’s practice</h2>
+<h2>Review characters</h2>
 <section class="card">
- <p>Red characters are reviews picked from your diagnosed mistakes or characters with repeated errors.</p>
+ <p>Red characters revisit saved diagnoses or repeated errors. The practice page can add new characters that match a recurring habit.</p>
  {% for c in plan %}<span class="tag{% if c in weak %} focus{% endif %}">{{ c }}</span>{% endfor %}
 </section>
 
