@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Learning profile · Hanzi Coach</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ body{font-family:system-ui,sans-serif;background:#faf6ef;color:#2b2b2b;padding:24px;max-width:760px;margin:auto}
+ h1{margin-bottom:4px}.muted{color:#666}.card{background:#fff;border-radius:12px;padding:16px 20px;margin:14px 0}
+ .focus{background:#fdecea;border-left:4px solid #c0392b}.tag{display:inline-block;background:#f4eee6;border-radius:999px;padding:5px 10px;margin:3px}
+ .example{padding:8px 0;border-top:1px solid #eee}.chars{font-size:25px;letter-spacing:7px}
+ a{color:#b83224} ul{padding-left:20px}
+</style></head><body>
+<h1>{{ user }}’s learning profile</h1>
+<div class="muted">{{ total }} practice attempts · Based on mistakes Hanzi Coach could identify clearly</div>
+
+{% if focus %}
+<section class="card focus">
+ {% if focus.recurring %}
+  <b>Your recurring focus: {{ focus.label|lower }}</b>
+  <div>Seen in {{ focus.character_count }} different characters, across {{ focus.count }} diagnosed attempts.</div>
+ {% else %}
+  <b>Early signal: {{ focus.label|lower }}</b>
+  <div>So far this appears in one character. I’ll look for it in another before calling it a recurring habit.</div>
+ {% endif %}
+ <p>Today’s review: <span class="chars">{% for c in focus.characters %}{{ c }}{% endfor %}</span></p>
+</section>
+{% endif %}
+
+<h2>Patterns I’ve seen</h2>
+{% for h in habits %}
+<section class="card">
+ <h3>{{ h.label }}</h3>
+ {% if h.recurring %}<p>Seen across {{ h.character_count }} characters ({{ h.count }} diagnosed attempts).</p>
+ {% else %}<p>Seen in {{ h.character_count }} character so far; more examples are needed to confirm a pattern.</p>{% endif %}
+ <div>{% for c in h.characters %}<span class="tag">{{ c }}</span>{% endfor %}</div>
+ {% for e in h.examples %}<div class="example"><b>{{ e.character }}</b> · {{ e.detail }}</div>{% endfor %}
+</section>
+{% empty %}
+<section class="card"><p>No clear order or direction pattern yet. Keep practicing; I’ll only add a pattern when I can match a drawn stroke to Hanzi Writer’s stroke data.</p></section>
+{% endfor %}
+
+<h2>Today’s practice</h2>
+<section class="card">
+ <p>Red characters are reviews picked from your diagnosed mistakes or characters with repeated errors.</p>
+ {% for c in plan %}<span class="tag{% if c in weak %} focus{% endif %}">{{ c }}</span>{% endfor %}
+</section>
+
+<h2>Recent practice</h2>
+<section class="card">
+ {% for a in attempts %}<div class="example"><b>{{ a.character }}</b> · {{ a.mistakes }} mistake{{ a.mistakes|pluralize }} · {{ a.created|date:"M j, g:i a" }}</div>
+ {% empty %}<p>No practice attempts yet.</p>{% endfor %}
+</section>
+<a href="/">← Back to practice</a>
+</body></html>

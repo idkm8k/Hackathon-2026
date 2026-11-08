@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Hanzi Coach</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<style>
+ body{font-family:system-ui,sans-serif;background:#faf6ef;color:#2b2b2b;margin:0;padding:24px;display:flex;flex-direction:column;align-items:center}
+ h1{margin:0 0 4px} .sub{color:#777;margin-bottom:16px}
+#board{background:#fff;border:2px solid #c0392b;border-radius:12px;touch-action:none}
+#board svg{touch-action:none;display:block}
+ .chars{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;justify-content:center}
+ .chars button{font-size:28px;padding:6px 14px;border-radius:10px;border:2px solid #ddd;background:#fff;cursor:pointer}
+ .chars button.weak{border-color:#c0392b;background:#fdecea}
+ .chars button.on{outline:3px solid #2b2b2b}
+ .row{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;justify-content:center}
+ .row button,.row input{padding:8px 14px;border-radius:8px;border:1px solid #bbb;background:#fff;cursor:pointer;font-size:15px}
+ #status{min-height:24px;font-weight:600} #tip{max-width:420px;text-align:center;background:#fff;padding:12px 16px;border-radius:10px;border-left:4px solid #c0392b;display:none}
+ a{color:#c0392b}
+</style></head><body>
+<h1>Hanzi Coach 写</h1>
+<div class="sub">Draw each stroke. It learns how <i>you</i> write.</div>
+<div class="row"><input id="user" placeholder="Your name"><button onclick="start()">Start</button>
+ <a href="#" id="dash" target="_blank">My mistake profile →</a></div>
+<div class="sub" id="plan"></div>
+<div class="chars" id="chars"></div>
+<div id="board"></div>
+<div id="status"></div>
+<div class="row"><button onclick="writer&&writer.animateCharacter()">Show stroke order</button>
+ <button onclick="say(current)">Hear it 🔊</button>
+ <button onclick="load(current)">Retry</button></div>
+<div id="tip"></div>
+<script>
+let writer,current,mistakes=[],details=[],characterData=null,loadId=0,user=localStorage.getItem('hz_user')||'';
+function strokeKind(points){
+  const p=pointsXY(points);if(p.length<2)return 'other';
+  const dx=Math.abs(p[p.length-1][0]-p[0][0]),dy=Math.abs(p[p.length-1][1]-p[0][1]);
+  if(dx<1&&dy<1)return 'other';
+  if(dx>=dy*1.8)return 'horizontal';
+  if(dy>=dx*1.8)return 'vertical';
+  return 'diagonal';
+}
+function pointsXY(points){
+  return (points||[]).map(p=>Array.isArray(p)?[Number(p[0]),Number(p[1])]:[Number(p.x),Number(p.y)])
+    .filter(p=>p.every(Number.isFinite));
+}
+function resample(points,count=20){
+  if(points.length<2)return [];
+  const lengths=[0];
+  for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+Math.hypot(points[i][0]-points[i-1][0],points[i][1]-points[i-1][1]));
+  const total=lengths[lengths.length-1];if(total<1)return [];
+  const out=[];let seg=1;
+  for(let i=0;i<count;i++){
+    const target=total*i/(count-1);
+    while(seg<lengths.length-1&&lengths[seg]<target)seg++;
+    const a=points[seg-1],b=points[seg],span=lengths[seg]-lengths[seg-1];
+    const f=span?(target-lengths[seg-1])/span:0;
+    out.push([a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]);
+  }
+  return out;
+}
+function pathError(drawn,median,reverse=false){
+  let expected=pointsXY(median);if(reverse)expected=expected.reverse();
+  const a=resample(pointsXY(drawn)),b=resample(expected);
+  if(a.length<2||b.length<2)return Infinity;
+  let sum=0;for(let i=0;i<a.length;i++)sum+=Math.hypot(a[i][0]-b[i][0],a[i][1]-b[i][1]);
+  return sum/a.length/900;
+}
+function diagnoseStroke(strokeNum,drawnPoints,data){
+  if(!data||!data.medians||!drawnPoints||strokeNum>=data.medians.length)return '';
+  const scores=data.medians.map((median,i)=>({i,forward:pathError(drawnPoints,median),reverse:pathError(drawnPoints,median,true)}));
+  const current=scores[strokeNum],maxError=0.14,margin=0.035;
+  const bestOther=scores.filter(s=>s.i!==strokeNum).sort((a,b)=>Math.min(a.forward,a.reverse)-Math.min(b.forward,b.reverse))[0];
+  if(current.reverse<=maxError&&current.reverse+margin<current.forward&&
+      (!bestOther||Math.min(bestOther.forward,bestOther.reverse)>current.reverse+margin))return 'reversed_'+(strokeNum+1);
+  const future=scores.filter(s=>s.i>strokeNum).sort((a,b)=>a.forward-b.forward);
+  const best=future[0],second=future[1];
+  if(best&&best.forward<=maxError&&best.forward+margin<Math.min(current.forward,current.reverse)&&
+      (!second||second.forward>best.forward+margin))return 'order_'+(strokeNum+1)+'_'+(best.i+1);
+  return '';
+}
+function strokeDescription(index,data){
+  const path=pointsXY(data.medians[index]||[]);if(path.length<2)return 'stroke '+(index+1)+' of '+data.medians.length;
+  const first=path[0],last=path[path.length-1],all=data.medians.flatMap(pointsXY);
+  const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  const region=p=>{
+    const x=(p[0]-minX)/(maxX-minX||1),y=1-(p[1]-minY)/(maxY-minY||1);
+    const col=x<.34?'left':x>.66?'right':'center',row=y<.34?'upper':y>.66?'lower':'middle';
+    if(row==='middle'&&col==='center')return 'center';
+    if(row==='middle')return col;
+    if(col==='center')return row;
+    return row+'-'+col;
+  };
+  const dx=last[0]-first[0],screenDy=first[1]-last[1];
+  const kind=Math.abs(dx)>=Math.abs(screenDy)*1.8?'horizontal':Math.abs(screenDy)>=Math.abs(dx)*1.8?'vertical':dx<0?'left-falling diagonal':'right-falling diagonal';
+  return 'stroke '+(index+1)+' of '+data.medians.length+' ('+region(path[Math.floor(path.length/2)])+' '+kind+')';
+}
+function endpointRegion(point,data){
+  const all=data.medians.flatMap(pointsXY),xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+  const x=(point[0]-Math.min(...xs))/(Math.max(...xs)-Math.min(...xs)||1),y=1-(point[1]-Math.min(...ys))/(Math.max(...ys)-Math.min(...ys)||1);
+  return (y<.34?'upper':y>.66?'lower':'middle')+'-'+(x<.34?'left':x>.66?'right':'center');
+}
+function diagnosisText(code,data){
+  let m=code.match(/^reversed_(\d+)$/);
+  if(m){
+    const i=Number(m[1])-1,path=pointsXY(data.medians[i]||[]);
+    if(path.length<2)return 'You drew '+strokeDescription(i,data)+' backwards.';
+    return 'You drew '+strokeDescription(i,data)+' backwards. Start at the '+endpointRegion(path[0],data)+' end and move to the '+endpointRegion(path[path.length-1],data)+' end.';
+  }
+  m=code.match(/^order_(\d+)_(\d+)$/);
+  if(m){const expected=Number(m[1])-1,drawn=Number(m[2])-1;
+    return strokeDescription(drawn,data)+' came too early. Draw '+strokeDescription(expected,data)+' first.';
+  }
+  return '';
+}
+document.getElementById('user').value=user;
+if(user)start();
+async function start(){
+  user=document.getElementById('user').value.trim()||'guest';
+  localStorage.setItem('hz_user',user);
+  document.getElementById('dash').href='/dashboard/?user='+encodeURIComponent(user);
+  const r=await (await fetch('/api/practice/?user='+encodeURIComponent(user))).json();
+  document.getElementById('plan').textContent=r.habit?
+    (r.recurring?'Today\'s plan reviews your recurring '+r.habit.toLowerCase()+' pattern (red).':'Today\'s plan reviews a '+r.habit.toLowerCase()+' issue we\'ve seen so far (red).'):
+    (r.weak.length?'Welcome back, '+user+'! Today\'s plan reviews characters with repeated errors (red).':'Hi '+user+'! Let\'s start practicing.');
+  const box=document.getElementById('chars');box.innerHTML='';
+  r.chars.forEach(c=>{const b=document.createElement('button');b.textContent=c;
+    if(r.weak.includes(c))b.className='weak';b.onclick=()=>load(c);box.appendChild(b)});
+  load(r.chars[0]);
+}
+async function load(ch){
+  const thisLoad=++loadId;
+  if(writer)writer.cancelQuiz();
+  current=ch;mistakes=[];details=[];characterData=null;
+  document.getElementById('tip').style.display='none';
+  document.getElementById('status').textContent='Draw stroke 1';
+  document.querySelectorAll('.chars button').forEach(b=>b.classList.toggle('on',b.textContent===ch));
+  document.getElementById('board').innerHTML='';
+  const size=Math.min(window.innerWidth-48,360);
+  const bd=document.getElementById('board');bd.style.width=size+'px';bd.style.height=size+'px';
+  document.getElementById('status').textContent='Loading stroke data…';
+  try{characterData=await HanziWriter.loadCharacterData(ch)}catch(e){
+    if(thisLoad===loadId)document.getElementById('status').textContent='Could not load stroke data. Check your connection and retry.';
+    return;
+  }
+  if(thisLoad!==loadId)return;
+  writer=HanziWriter.create('board',ch,{width:size,height:size,padding:15,showOutline:true,showCharacter:false,
+    charDataLoader:()=>characterData});
+  writer.quiz({
+    onMistake:s=>{const stroke=s.strokeNum+1;mistakes.push(stroke);
+      const points=s.drawnPath&&s.drawnPath.points||[];
+      details.push({stroke,size:900,points,diagnosis:diagnoseStroke(s.strokeNum,points,characterData)});
+      document.getElementById('status').textContent='✗ Stroke '+(s.strokeNum+1)+' — try again'},
+    onCorrectStroke:s=>{document.getElementById('status').textContent='✓ Nice! Next stroke'},
+    onComplete:finish});
+}
+async function finish(){
+  document.getElementById('status').textContent='Done! '+mistakes.length+' mistake(s)';
+  const body=JSON.stringify({user,character:current,mistakes,details,completed:true});
+  await fetch('/api/log/',{method:'POST',body});
+  let tip='';
+  const diagnosed=details.find(d=>d.diagnosis);
+  if(diagnosed)tip=diagnosisText(diagnosed.diagnosis,characterData);
+  else if(mistakes.length)tip='Hanzi Writer marked a stroke incorrect, but I couldn’t confidently match your path to another stroke. Show stroke order, then retry.';
+  if(!tip)return;
+  const el=document.getElementById('tip');el.textContent=tip;el.style.display='block';
+  if(mistakes.length)say(tip);
+}
+async function say(text){
+  try{const r=await fetch('/api/tts/?text='+encodeURIComponent(text));
+    if(r.status!==200)return;
+    new Audio(URL.createObjectURL(await r.blob())).play();}catch(e){}
+}
+</script></body></html>
