@@ -16,7 +16,7 @@
  #score{font-weight:700;color:#7df9ff;min-width:60px;text-align:right}
  .hud{display:flex;justify-content:space-between;margin:6px 0 8px;font-size:15px}
  #wave{color:#b8c0ff}
- #stage{position:relative;height:244px;border-radius:14px;border:2px solid #2d3a8c;background:rgba(10,12,50,.55);overflow:hidden}
+ #stage{position:relative;height:262px;border-radius:14px;border:2px solid #2d3a8c;background:rgba(10,12,50,.55);overflow:hidden}
  .alien{position:absolute;top:10px;left:50%;margin-left:-36px;width:72px;text-align:center;animation:driftA 5s ease-in-out infinite alternate}
  @keyframes driftA{from{transform:translateX(-95px)}to{transform:translateX(95px)}}
  @keyframes driftB{from{transform:translateX(75px)}to{transform:translateX(-75px)}}
@@ -29,9 +29,15 @@
  .rocket{display:inline-block;transform:rotate(-45deg);font-size:50px;line-height:1;filter:drop-shadow(0 0 10px #00e5ff)}
  .flame{width:10px;height:14px;margin:-2px auto 0;border-radius:50% 50% 60% 60%;background:linear-gradient(#fff,#ffb703,#ff4d6d);animation:flick .12s infinite alternate}
  @keyframes flick{from{transform:scaleY(.6)}to{transform:scaleY(1.3)}}
- #bubble{position:absolute;left:50%;top:94px;transform:translateX(-50%) scale(.92);width:calc(100% - 24px);max-width:380px;box-sizing:border-box;padding:7px 12px;border-radius:12px;background:rgba(25,10,45,.93);border:2px solid #ff4d6d;font-size:14px;line-height:1.3;text-align:center;opacity:0;transition:opacity .2s,transform .2s;z-index:5;pointer-events:none}
+ #bubble{position:absolute;left:50%;top:96px;transform:translateX(-50%) scale(.92);width:calc(100% - 28px);max-width:370px;box-sizing:border-box;padding:8px 14px 9px;border-radius:14px;background:rgba(25,10,45,.95);border:2px solid #ff4d6d;box-shadow:0 0 14px rgba(255,77,109,.45);text-align:center;opacity:0;transition:opacity .2s,transform .2s;z-index:5;pointer-events:none}
+ #bubble::after{content:"";position:absolute;top:-10px;left:50%;margin-left:-8px;border:8px solid transparent;border-top:0;border-bottom:10px solid #ff4d6d}
+ #bTaunt{font-size:16px;font-weight:800;color:#ff8fa3;line-height:1.25}
+ #bHint{font-size:13px;color:#e8ecff;margin-top:3px;line-height:1.3}
+ #bHint:empty{display:none}
  #bubble.show{opacity:1;transform:translateX(-50%) scale(1)}
- #bubble.good{border-color:#00e5ff}
+ #bubble.good{border-color:#00e5ff;box-shadow:0 0 14px rgba(0,229,255,.45)}
+ #bubble.good::after{border-bottom-color:#00e5ff}
+ #bubble.good #bTaunt{color:#7df9ff}
  .proj{position:absolute;z-index:6;pointer-events:none}
  .laser{width:5px;height:30px;border-radius:4px;background:linear-gradient(#fff,#00e5ff);box-shadow:0 0 10px #00e5ff,0 0 20px #00e5ff}
  .laser.big{width:12px;height:48px;box-shadow:0 0 16px #00e5ff,0 0 34px #7df9ff}
@@ -39,6 +45,8 @@
  .boom{position:absolute;z-index:7;pointer-events:none;line-height:1}
  .spark{position:absolute;width:6px;height:6px;border-radius:50%;z-index:7;pointer-events:none}
  .pop{position:absolute;z-index:8;pointer-events:none;font-weight:800;font-size:22px;color:#ffd166;text-shadow:0 0 8px #000}
+ #timer{height:9px;margin:8px auto 0;background:rgba(10,12,50,.7);border:1px solid #2d3a8c;border-radius:6px;overflow:hidden}
+ #timer i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#00e5ff,#7df9ff)}
  #board{margin:10px auto 0;background:rgba(8,10,40,.78);border:2px solid #00e5ff;border-radius:14px;box-shadow:0 0 18px rgba(0,229,255,.35);touch-action:none}
  #board svg{touch-action:none;display:block}
  #status{text-align:center;min-height:24px;margin-top:8px;font-weight:600;color:#b8c0ff}
@@ -57,8 +65,9 @@
  <div id="stage">
   <div class="alien" id="alien"><div class="bob"><div class="fx" id="alienFx"><span id="alienEmoji">👾</span></div></div><div class="hp"><i id="hpFill"></i></div></div>
   <div class="ship" id="ship"><div class="bob"><div class="fx" id="shipFx"><span class="rocket">🚀</span><div class="flame"></div></div></div></div>
-  <div id="bubble"></div>
+  <div id="bubble"><div id="bTaunt"></div><div id="bHint"></div></div>
  </div>
+ <div id="timer"><i id="timerFill"></i></div>
  <div id="board"></div>
  <div id="status"></div>
 </div>
@@ -67,13 +76,18 @@
 const STARTER=Array.from("人大天口日月木水火山你好我他中国学书写永");
 const ALIENS=['👾','👽','🛸','🤖','👹'];
 const MAX_HEARTS=5;
+/* ---- TIMER SETTINGS (change these to make it easier or harder) ---- */
+const TIME_BASE=4.5;            // seconds allowed for a character with up to TIME_FREE_STROKES strokes
+const TIME_FREE_STROKES=4;      // strokes covered by the base time
+const TIME_PER_EXTRA_STROKE=1.0;// extra seconds for each stroke above TIME_FREE_STROKES
+const STALL_MS=5000;            // clock starts by itself if you wait this long without touching the board
 const TAUNTS=['Hahaha, Earthling!','Pathetic!','My pet slug writes better!','Is that your best?','Bzzzt, wrong!','Your ink is weak!'];
-const GENERIC=['That stroke was off. Slow down and trace the outline!','Wrong path! Follow the stroke order.','Not even close. Watch the outline!'];
+const GENERIC=['Slow down and trace the outline.','Follow the outline and the stroke order.','Watch the outline, then try again.'];
 const $=id=>document.getElementById(id);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 let user='';try{user=localStorage.getItem('hz_user')||''}catch(e){}
 user=user||'guest';
-let queue=[],score=0,hearts=MAX_HEARTS,wave=0,writer=null,characterData=null,current='',mistakes=[],details=[],strokeReplay=[],totalStrokes=1,alive=false,loadId=0,bubbleTimer=null;
+let queue=[],score=0,hearts=MAX_HEARTS,wave=0,writer=null,characterData=null,current='',mistakes=[],details=[],strokeReplay=[],totalStrokes=1,alive=false,loadId=0,bubbleTimer=null,timerOn=false,timerStart=0,timerLimit=0,timerRaf=0,stallTimer=0;
 const cache=new Map();
 
 /* ---------- starfield ---------- */
@@ -162,6 +176,17 @@ function diagnosisText(code,data){
   }
   return '';
 }
+function strokeShort(i,data){
+  const m=strokeDescription(i,data).match(/\(([^)]+)\)/);
+  return m?m[1]:'stroke '+(i+1);
+}
+function shortHint(code,data){
+  let m=code.match(/^order_(\d+)_(\d+)$/);
+  if(m)return 'Draw the '+strokeShort(Number(m[1])-1,data)+' stroke first.';
+  m=code.match(/^reversed_(\d+)$/);
+  if(m)return 'The '+strokeShort(Number(m[1])-1,data)+' stroke goes the other way.';
+  return '';
+}
 function habitKind(points){
   const p=pointsXY(points);if(p.length<2)return 'other';
   const dx=Math.abs(p[p.length-1][0]-p[0][0]),dy=Math.abs(p[p.length-1][1]-p[0][1]);
@@ -224,11 +249,37 @@ function popText(text,el){
   d.style.left=(c.x-20)+'px';d.style.top=(c.y-10)+'px';$('stage').appendChild(d);
   d.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-50px)',opacity:0}],{duration:900,easing:'ease-out'}).onfinish=()=>d.remove();
 }
-function say(text,kind){
-  const b=$('bubble');b.textContent=text;b.className='show '+(kind||'');
-  clearTimeout(bubbleTimer);bubbleTimer=setTimeout(()=>{b.className=''},4500);
+function say(text,kind,hint){
+  const b=$('bubble');$('bTaunt').textContent=text;$('bHint').textContent=hint||'';
+  b.className='show '+(kind||'');
+  clearTimeout(bubbleTimer);bubbleTimer=setTimeout(()=>{b.className=''},6500);
 }
 function setHp(f){$('hpFill').style.width=Math.max(0,Math.min(1,f))*100+'%'}
+function limitMs(){return (TIME_BASE+TIME_PER_EXTRA_STROKE*Math.max(0,totalStrokes-TIME_FREE_STROKES))*1000}
+function setTimerBar(f){
+  const i=$('timerFill');i.style.width=Math.max(0,f)*100+'%';
+  i.style.background=f<.3?'linear-gradient(90deg,#ff4d6d,#ff0040)':'linear-gradient(90deg,#00e5ff,#7df9ff)';
+}
+function stopTimer(){timerOn=false;cancelAnimationFrame(timerRaf);clearTimeout(stallTimer)}
+function resetTimerBar(){stopTimer();setTimerBar(1)}
+function startTimer(){
+  if(timerOn||!alive)return;
+  clearTimeout(stallTimer);
+  timerOn=true;timerLimit=limitMs();timerStart=performance.now();
+  const tick=()=>{
+    if(!timerOn)return;
+    const left=1-(performance.now()-timerStart)/timerLimit;
+    if(left<=0){setTimerBar(0);onTimeout();return}
+    setTimerBar(left);timerRaf=requestAnimationFrame(tick);
+  };
+  timerRaf=requestAnimationFrame(tick);
+}
+function onTimeout(){
+  if(!alive)return;
+  timerOn=false;
+  playerHit('Too slow, Earthling!','Draw faster to keep your shields up.','⏱ Too slow! The alien fires back!');
+  if(alive){setTimerBar(1);startTimer()}
+}
 function renderHud(){
   $('hearts').textContent='❤️'.repeat(Math.max(0,hearts))+'🖤'.repeat(Math.max(0,MAX_HEARTS-hearts));
   $('score').textContent=score;
@@ -250,7 +301,7 @@ async function startGame(){
   score=0;hearts=MAX_HEARTS;wave=0;alive=true;
   $('ship').style.visibility='visible';
   if(writer){try{writer.cancelQuiz()}catch(e){}}
-  queue=[];
+  queue=[];resetTimerBar();
   try{
     const r=await (await fetch('/api/practice/?user='+encodeURIComponent(user))).json();
     const mine=(r.chars||[]).filter(c=>c&&c.length===1);
@@ -263,25 +314,27 @@ async function spawnAlien(){
   if(!alive)return;
   wave++;renderHud();
   current=nextChar();mistakes=[];details=[];strokeReplay=[];
-  const myLoad=++loadId;
+  const myLoad=++loadId;resetTimerBar();
   $('alienEmoji').textContent=ALIENS[(wave-1)%ALIENS.length];
   $('alien').style.visibility='visible';
   $('alienFx').animate([{transform:'translateY(-130px) scale(.5)',opacity:0},{transform:'none',opacity:1}],{duration:550,easing:'ease-out'});
   setHp(1);
   const board=$('board');board.innerHTML='';
-  const size=Math.max(240,Math.min(window.innerWidth-40,340,window.innerHeight-380));
+  const size=Math.max(240,Math.min(window.innerWidth-40,340,window.innerHeight-415));
   board.style.width=size+'px';board.style.height=size+'px';
   $('status').textContent='Loading stroke data…';
   try{characterData=cache.get(current)||await HanziWriter.loadCharacterData(current);cache.set(current,characterData)}
   catch(e){$('status').textContent='Could not load stroke data. Check your connection and reload.';return}
   if(myLoad!==loadId||!alive)return;
   totalStrokes=characterData.medians.length||1;
-  say('Write '+current+' or be vaporized, Earthling!','');
+  say('Write '+current+' or be vaporized, Earthling!','','Beat the clock: '+(limitMs()/1000).toFixed(1)+' seconds!');
   $('status').textContent='Draw stroke 1 to fire!';
   writer=HanziWriter.create('board',current,{width:size,height:size,padding:15,showOutline:true,showCharacter:false,
     outlineColor:'#2d3a8c',strokeColor:'#00e5ff',drawingColor:'#ffffff',drawingWidth:5,
     charDataLoader:()=>characterData});
   writer.quiz({onMistake,onCorrectStroke,onComplete});
+  board.addEventListener('pointerdown',startTimer,{once:true});
+  stallTimer=setTimeout(startTimer,STALL_MS);
 }
 function onMistake(s){
   if(!alive)return;
@@ -290,12 +343,15 @@ function onMistake(s){
   const diagnosis=diagnoseStroke(s.strokeNum,points,characterData);
   details.push({stroke,size:900,points,diagnosis,habit:habitForDiagnosis(diagnosis,characterData)});
   strokeReplay.push({stroke,correct:false,size:900,points,diagnosis});
-  const reason=diagnosis?diagnosisText(diagnosis,characterData):'';
-  say(pick(TAUNTS)+' '+(reason||pick(GENERIC)),'');
+  const hint=(diagnosis&&shortHint(diagnosis,characterData))||pick(GENERIC);
+  playerHit(pick(TAUNTS),hint,'✗ Stroke '+stroke+' — the alien fires back!');
+}
+function playerHit(taunt,hint,status){
+  say(taunt,'',hint);
   hearts--;renderHud();
-  $('status').textContent='✗ Stroke '+stroke+' — the alien fires back!';
+  $('status').textContent=status;
   const dead=hearts<=0;
-  if(dead){alive=false;try{writer.cancelQuiz()}catch(e){}}
+  if(dead){alive=false;stopTimer();try{writer.cancelQuiz()}catch(e){}}
   shoot($('alienEmoji'),$('shipFx'),'bolt',()=>{
     if(dead){
       explode($('shipFx'),true);$('ship').style.visibility='hidden';
@@ -315,6 +371,7 @@ function onCorrectStroke(s){
 }
 function onComplete(){
   if(!alive)return;
+  stopTimer();setTimerBar(1);
   setHp(0);
   const perfect=mistakes.length===0;
   const gain=10*totalStrokes+(perfect?25:0);
