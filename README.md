@@ -4,7 +4,7 @@ I'm an aspiring polyglot and Chinese is the fourth language I'm learning. Since 
 But stroke order isn't random. It follows rules and conventions, and if you learn the patterns, you can write a character of any difficulty, even one you've never seen. I wanted to make an app that doesn't just force you to memorize, but understand.
 
 # What it does
-Hanzi Coach is a stroke-order trainer that adapts to your thinking, not just your strokes. It uses a data base of all your strokes, 12 hours of me hardcoding common pattern problems, and the Gemini API to make a personalized response that's adaptive to you.
+Hanzi Coach is a stroke-pattern trainer that adapts to your thinking, not just your strokes. It uses a data base of all your strokes, 12 hours of me hardcoding common pattern problems, and the Gemini API to make a personalized response that's adaptive to you. Instead of memorizing characters, you understand patterns, so that you can write any character of any complexity intuitively.
 
 It's also gamified as an optional mode: land a correct stroke and you blast the enemy, make a mistake or run out of time and the enemy strikes back. They may ragebait you a little if you mess up.
 
@@ -35,21 +35,6 @@ python manage.py runserver
 ```
 
 Open `http://localhost:8000`.
-
-Optional: set `GEMINI_API_KEY` in your PowerShell session (never commit it). Without it, the app uses the built-in rule text. `GEMINI_MODEL` and `GEMINI_MAX_PER_MINUTE` (default 30) are also configurable.
-
-## Demo prep
-
-```powershell
-python manage.py seed_demo
-python manage.py pregen_explanations
-python manage.py test
-```
-
-- `seed_demo` creates **sample** history for user `demo` (open `/dashboard/?user=demo`). It is sample data, not real usage.
-- `pregen_explanations` saves Gemini explanations for the practice characters (about 21 calls, needs a key). Read them before presenting.
-
-For a phone demo, point a Cloudflare quick tunnel at `http://localhost:8000`.
 
 ## Limitations
 
