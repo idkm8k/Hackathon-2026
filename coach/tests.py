@@ -87,7 +87,7 @@ class EnclosureRuleIntegrationTests(TestCase):
         self.assertIn("Close the door last", response.json()["explanation"])
         self.assertIn(RULES["close_the_door_last"]["mnemonic"], response.json()["explanation"])
         self.assertEqual(response.json()["source"], "rule")
-        self.assertEqual(ExplanationCache.objects.get().level, "first")
+        self.assertFalse(ExplanationCache.objects.exists())  # fallback text is never cached
 
     def test_gemini_failure_uses_rule_fallback_without_error(self):
         log = self.client.post("/api/log/", data=json.dumps({
@@ -126,8 +126,9 @@ class EnclosureRuleIntegrationTests(TestCase):
         prompt = gemini.call_args.args[0]
         self.assertIn(RULES["close_the_door_last"]["definition"], prompt)
         self.assertIn("stroke(s) 8: closing stroke", prompt)
-        self.assertIn("expected; the learner drew stroke", prompt)
-        self.assertIn("learner history for this same rule", prompt.lower())
+        # the prompt must stay history-free so the explanation can be shared by all learners
+        self.assertNotIn("history for this same rule", prompt.lower())
+        self.assertNotIn("日、田", prompt)
 
     def test_practice_picker_targets_family_and_gates_exceptions_until_success(self):
         attempt = Attempt.objects.create(user="learner", character="日", mistakes=1, completed=True)
@@ -151,6 +152,52 @@ class EnclosureRuleIntegrationTests(TestCase):
         response = self.client.get("/dashboard/?user=learner")
         self.assertContains(response, "Close the door last")
         self.assertContains(response, "日")
+
+    def test_shared_explanation_is_reused_across_attempts_and_users(self):
+        def log(user):
+            return self.client.post("/api/log/", data=json.dumps({
+                "user": user, "character": "日", "mistakes": [3],
+                "details": [{"stroke": 3, "points": [], "diagnosis": "order_3_4"}],
+            }), content_type="application/json").json()["attempt_id"]
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), patch(
+            "coach.views.gemini_result", return_value=("The bottom stroke closes the box, so it goes last.", "")
+        ) as gemini:
+            for user in ("alice", "alice", "alice", "bob"):
+                response = self.client.post("/api/explain/", data=json.dumps({
+                    "user": user, "attempt_id": log(user)}), content_type="application/json")
+                self.assertIn("closes the box", response.json()["explanation"])
+        self.assertEqual(gemini.call_count, 1)
+
+    def test_personal_history_is_added_by_code_not_by_gemini(self):
+        for ch, diagnosis in (("日", "order_3_4"), ("田", "order_4_5")):
+            attempt = Attempt.objects.create(user="learner", character=ch, mistakes=1, completed=True)
+            StrokeMistake.objects.create(attempt=attempt, user="learner", character=ch,
+                                         stroke_num=3, diagnosis=diagnosis, rule="close_the_door_last")
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), patch(
+            "coach.views.gemini_result", return_value=("Leave the bottom wall for last.", "")
+        ):
+            result = self.client.post("/api/explain/", data=json.dumps({
+                "user": "learner", "attempt_id": attempt.pk}), content_type="application/json").json()
+        self.assertIn("日 and 田", result["explanation"])
+        self.assertEqual(result["level"], "repeat")
+
+    def test_api_log_rejects_non_character_input(self):
+        for bad in ("", "ab", "日日", "x" * 500, None):
+            response = self.client.post("/api/log/", data=json.dumps({"user": "u", "character": bad}),
+                                        content_type="application/json")
+            self.assertEqual(response.status_code, 400, bad)
+
+    def test_gemini_global_budget_returns_fallback_not_error(self):
+        from coach import views
+        views._GEMINI_CALLS.clear()
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "k", "GEMINI_MAX_PER_MINUTE": "2"}), patch(
+            "coach.views.urllib.request.urlopen", side_effect=OSError("no network in tests")
+        ):
+            results = [views.gemini_result("hi") for _ in range(4)]
+        self.assertIn("busy", results[2][1])
+        self.assertIn("busy", results[3][1])
+        views._GEMINI_CALLS.clear()
+
 
 
 class HeadsUpEndpointTests(TestCase):
