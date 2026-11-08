@@ -8,6 +8,8 @@
 #board{background:#fff;border:2px solid #c0392b;border-radius:12px;touch-action:none}
 #board svg{touch-action:none;display:block}
  .chars{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;justify-content:center}
+ #headsUp{max-width:420px;width:100%;box-sizing:border-box;margin:0 0 10px;padding:7px 12px;border-radius:8px;background:#edf6ed;color:#315d34;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #replayLink{font-weight:600}
  .chars button{font-size:28px;padding:6px 14px;border-radius:10px;border:2px solid #ddd;background:#fff;cursor:pointer}
  .chars button.weak{border-color:#c0392b;background:#fdecea}
  .chars button.on{outline:3px solid #2b2b2b}
@@ -28,12 +30,14 @@
  <button onclick="practiceCustom()">Practice</button></div>
 <div class="sub" id="custom-status" aria-live="polite"></div>
 <div class="chars" id="chars"></div>
+<div id="headsUp" role="status" hidden></div>
 <div id="board"></div>
 <div id="status"></div>
 <div class="row"><button onclick="writer&&writer.animateCharacter()">Show stroke order</button>
  <button onclick="say(current)">Hear it 🔊</button>
  <button onclick="load(current)">Retry</button><button onclick="showAsk()">Ask why?</button></div>
 <div id="tip"></div>
+<div class="row"><a id="replayLink" href="#" target="_blank" rel="noopener" hidden>Replay this attempt ↗</a></div>
 <section id="askBox"><b>Ask about this stroke order</b>
  <div class="sub">Gemini will use Hanzi Writer’s sequence as context.</div>
  <textarea id="question" rows="2" maxlength="500" placeholder="Why does a vertical stroke come before a horizontal here?"></textarea>
@@ -41,7 +45,7 @@
  <div id="answer" aria-live="polite"></div>
 </section>
 <script>
-let writer,current,mistakes=[],details=[],characterData=null,loadId=0,user=localStorage.getItem('hz_user')||'';
+let writer,current,mistakes=[],details=[],strokeReplay=[],characterData=null,loadId=0,user=localStorage.getItem('hz_user')||'';
 const characterDataCache=new Map();
 function strokeKind(points){
   const p=pointsXY(points);if(p.length<2)return 'other';
@@ -198,8 +202,15 @@ async function start(){
 async function load(ch){
   const thisLoad=++loadId;
   if(writer)writer.cancelQuiz();
-  current=ch;mistakes=[];details=[];characterData=null;
+  current=ch;mistakes=[];details=[];strokeReplay=[];characterData=null;
   document.getElementById('tip').style.display='none';
+  document.getElementById('replayLink').hidden=true;
+  const notice=document.getElementById('headsUp');notice.hidden=true;notice.textContent='';
+  fetch('/api/heads_up/?user='+encodeURIComponent(user)+'&character='+encodeURIComponent(ch))
+    .then(r=>r.json()).then(data=>{
+      if(thisLoad!==loadId||current!==ch||!data.heads_up)return;
+      const h=data.heads_up;notice.textContent='Heads up: '+h.name+' · '+h.count+' time(s) in '+h.characters.join('、')+' · '+h.mnemonic;notice.hidden=false;
+    }).catch(()=>{});
   document.getElementById('status').textContent='Draw stroke 1';
   document.querySelectorAll('.chars button').forEach(b=>b.classList.toggle('on',b.textContent===ch));
   document.getElementById('board').innerHTML='';
@@ -213,24 +224,33 @@ async function load(ch){
   if(thisLoad!==loadId)return;
   writer=HanziWriter.create('board',ch,{width:size,height:size,padding:15,showOutline:true,showCharacter:false,
     charDataLoader:()=>characterData});
+  const board=document.getElementById('board');
+  board.addEventListener('pointerdown',()=>{document.getElementById('headsUp').hidden=true},{once:true});
   writer.quiz({
-    onMistake:s=>{const stroke=s.strokeNum+1;mistakes.push(stroke);
+    onMistake:s=>{document.getElementById('headsUp').hidden=true;const stroke=s.strokeNum+1;mistakes.push(stroke);
       const points=s.drawnPath&&s.drawnPath.points||[];
       const diagnosis=diagnoseStroke(s.strokeNum,points,characterData);
-      details.push({stroke,size:900,points,diagnosis,habit:habitForDiagnosis(diagnosis,characterData)});
+      const item={stroke,size:900,points,diagnosis,habit:habitForDiagnosis(diagnosis,characterData)};
+      details.push(item);strokeReplay.push({stroke,correct:false,size:900,points,diagnosis});
       document.getElementById('status').textContent='✗ Stroke '+(s.strokeNum+1)+' — try again'},
-    onCorrectStroke:s=>{document.getElementById('status').textContent='✓ Nice! Next stroke'},
+    onCorrectStroke:s=>{
+      console.log('[Hanzi Coach] onCorrectStroke callback data:',s);
+      document.getElementById('headsUp').hidden=true;
+      const stroke=s.strokeNum+1,points=s.drawnPath&&s.drawnPath.points||[];
+      strokeReplay.push({stroke,correct:true,size:900,points});
+      document.getElementById('status').textContent='✓ Nice! Next stroke'},
     onComplete:finish});
 }
 async function finish(){
   document.getElementById('status').textContent='Done! '+mistakes.length+' mistake(s)';
-  const body=JSON.stringify({user,character:current,mistakes,details,completed:true});
+  const body=JSON.stringify({user,character:current,mistakes,details,replay:strokeReplay,completed:true});
   let logged=null;
   try{logged=await (await fetch('/api/log/',{method:'POST',headers:{'Content-Type':'application/json'},body})).json()}catch(e){}
   let tip='';
   const diagnosed=details.find(d=>d.diagnosis);
   if(diagnosed)tip=diagnosisText(diagnosed.diagnosis,characterData);
   else if(mistakes.length)tip='Hanzi Writer marked a stroke incorrect, but I couldn’t confidently match your path to another stroke. Show stroke order, then retry.';
+  if(logged&&logged.attempt_id){const replayLink=document.getElementById('replayLink');replayLink.href='/replay/'+logged.attempt_id+'/?user='+encodeURIComponent(user);replayLink.hidden=false}
   if(!tip)return;
   if(logged&&logged.rule_explanation)tip=logged.rule_explanation;
   const el=document.getElementById('tip');el.textContent=tip;el.style.display='block';

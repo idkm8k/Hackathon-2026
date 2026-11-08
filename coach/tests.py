@@ -151,3 +151,70 @@ class EnclosureRuleIntegrationTests(TestCase):
         response = self.client.get("/dashboard/?user=learner")
         self.assertContains(response, "Close the door last")
         self.assertContains(response, "日")
+
+
+class HeadsUpEndpointTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        EnclosureChar.objects.bulk_create([
+            EnclosureChar(character="日", family="box", frame_component="口", pattern="FFIC"),
+            EnclosureChar(character="田", family="box", frame_component="囗", pattern="FFIIC"),
+            EnclosureChar(character="国", family="box", frame_component="囗", pattern="FFIIIIIC"),
+            EnclosureChar(character="这", family="walk", frame_component="辶", pattern="IIIIWWW"),
+            EnclosureChar(character="凶", family="cup", frame_component="凵", pattern="IIWW"),
+        ])
+
+    def add_rule_mistake(self, user, character, rule):
+        attempt = Attempt.objects.create(user=user, character=character, mistakes=1, completed=True)
+        return StrokeMistake.objects.create(
+            attempt=attempt, user=user, character=character,
+            stroke_num=1, diagnosis="order_1_2", rule=rule,
+        )
+
+    def test_returns_most_frequent_applicable_rule_and_learner_characters(self):
+        self.add_rule_mistake("learner", "日", "frame_before_contents")
+        self.add_rule_mistake("learner", "田", "close_the_door_last")
+        self.add_rule_mistake("learner", "国", "close_the_door_last")
+        self.add_rule_mistake("someone-else", "田", "close_the_door_last")
+        response = self.client.get("/api/heads_up/?user=learner&character=日")
+        self.assertEqual(response.status_code, 200)
+        result = response.json()["heads_up"]
+        self.assertEqual(result["rule"], "close_the_door_last")
+        self.assertEqual(result["name"], RULES["close_the_door_last"]["name"])
+        self.assertEqual(result["mnemonic"], RULES["close_the_door_last"]["mnemonic"])
+        self.assertEqual(result["count"], 2)
+        self.assertEqual(result["characters"], ["田", "国"])
+
+    def test_no_matching_history_or_unknown_character_returns_nothing(self):
+        response = self.client.get("/api/heads_up/?user=learner&character=日")
+        self.assertIsNone(response.json()["heads_up"])
+        response = self.client.get("/api/heads_up/?user=learner&character=未")
+        self.assertIsNone(response.json()["heads_up"])
+
+    def test_walk_and_cup_patterns_select_their_exception_rule(self):
+        self.add_rule_mistake("learner", "这", "walk_radical_last")
+        self.add_rule_mistake("learner", "凶", "contents_before_cup")
+        walk = self.client.get("/api/heads_up/?user=learner&character=这").json()["heads_up"]
+        cup = self.client.get("/api/heads_up/?user=learner&character=凶").json()["heads_up"]
+        self.assertEqual(walk["rule"], "walk_radical_last")
+        self.assertEqual(cup["rule"], "contents_before_cup")
+
+    def test_correct_and_mistaken_paths_are_saved_in_replay_order(self):
+        payload = {
+            "user": "learner", "character": "日", "mistakes": [3],
+            "details": [{"stroke": 3, "points": [[100, 200], [200, 200]], "diagnosis": "order_3_4"}],
+            "replay": [
+                {"stroke": 3, "correct": False, "size": 900,
+                 "points": [[100, 200], [200, 200]], "diagnosis": "order_3_4"},
+                {"stroke": 3, "correct": True, "size": 900,
+                 "points": [[101, 201], [202, 201]]},
+            ],
+        }
+        response = self.client.post("/api/log/", data=json.dumps(payload), content_type="application/json")
+        attempt_id = response.json()["attempt_id"]
+        traces = list(Attempt.objects.get(pk=attempt_id).stroke_traces.all())
+        self.assertEqual([trace.correct for trace in traces], [False, True])
+        self.assertEqual(json.loads(traces[0].drawn_points), [[100, 200], [200, 200]])
+        replay = self.client.get("/replay/{}/?user=learner".format(attempt_id))
+        self.assertEqual(replay.status_code, 200)
+        self.assertContains(replay, "replay-events")

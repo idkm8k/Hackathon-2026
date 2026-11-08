@@ -43,3 +43,20 @@ class ExplanationCache(models.Model):
             fields=["user", "character", "rule", "level"],
             name="unique_enclosure_explanation_cache",
         )]
+
+
+class StrokeTrace(models.Model):
+    attempt = models.ForeignKey(Attempt, on_delete=models.CASCADE, related_name="stroke_traces")
+    user = models.CharField(max_length=50, db_index=True)
+    character = models.CharField(max_length=4)
+    sequence = models.PositiveIntegerField()
+    stroke_num = models.PositiveIntegerField()
+    correct = models.BooleanField(default=False)
+    drawn_points = models.TextField(blank=True, default="[]")
+    board_size = models.IntegerField(default=900)
+    diagnosis = models.CharField(max_length=40, blank=True, default="")
+    rule = models.CharField(max_length=64, blank=True, default="", db_index=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("sequence", "id")

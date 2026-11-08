@@ -17,6 +17,8 @@ python manage.py runserver
 
 Open `http://localhost:8000` in a browser. Attempt history is stored in the local SQLite database. The database and virtual environment are intentionally excluded from Git.
 
+To add repeatable sample history for the enclosure-rule demo, run `python manage.py seed_demo`, then open `/dashboard/?user=demo`.
+
 Gemini tips and ElevenLabs speech are optional. If you use them, set `GEMINI_API_KEY` or `ELEVENLABS_API_KEY` in your local PowerShell session. Keep keys out of source files and Git.
 
 ## Phone demo

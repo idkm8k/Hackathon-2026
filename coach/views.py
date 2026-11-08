@@ -2,9 +2,9 @@ import json, os, re, urllib.error, urllib.request
 from collections import Counter
 from django.db.models import Avg, Count
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
-from .models import Attempt, EnclosureChar, ExplanationCache, StrokeMistake
+from .models import Attempt, EnclosureChar, ExplanationCache, StrokeMistake, StrokeTrace
 from .enclosure_rules import RULES, describe_roles, rule_for
 
 STARTER = list("人大天口日月木水火山你好我他中国学书写永")
@@ -242,6 +242,42 @@ def api_practice(request):
                          "exceptions_unlocked": unlocked})
 
 
+def applicable_enclosure_rules(row):
+    rules = []
+    pattern = row.pattern
+    if "C" in pattern:
+        rules.append("close_the_door_last")
+    if any(a == "F" and b == "I" for i, a in enumerate(pattern)
+           for b in pattern[i + 1:]):
+        rules.append("frame_before_contents")
+    if "W" in pattern:
+        rules.append("contents_before_cup" if row.family == "cup" else "walk_radical_last")
+    return rules
+
+
+def api_heads_up(request):
+    user = request.GET.get("user", "guest") or "guest"
+    character = request.GET.get("character", "")
+    row = EnclosureChar.objects.filter(pk=character).first()
+    if not row:
+        return JsonResponse({"heads_up": None})
+    applicable = applicable_enclosure_rules(row)
+    counts = Counter(dict(StrokeMistake.objects.filter(
+        user=user, rule__in=applicable
+    ).values("rule").annotate(total=Count("id")).values_list("rule", "total")))
+    if not counts:
+        return JsonResponse({"heads_up": None})
+    rule_code, count = sorted(counts.items(), key=lambda item: (-item[1], item[0]))[0]
+    characters = list(dict.fromkeys(StrokeMistake.objects.filter(
+        user=user, rule=rule_code
+    ).order_by("created").values_list("character", flat=True)))
+    info = RULES[rule_code]
+    return JsonResponse({"heads_up": {
+        "rule": rule_code, "name": info["name"], "mnemonic": info["mnemonic"],
+        "count": count, "characters": characters,
+    }})
+
+
 def enclosure_fallback(rule_code, characters):
     info = RULES[rule_code]
     text = "{}: {} Mnemonic: {}".format(info["name"], info["definition"], info["mnemonic"])
@@ -312,6 +348,19 @@ def explain_enclosure(mistake):
     return {"explanation": explanation, "source": source, "rule": rule_code, "level": level}
 
 
+def verified_enclosure_rule(character, diagnosis):
+    match = re.fullmatch(r"order_(\d+)_(\d+)", diagnosis or "")
+    if not match:
+        return ""
+    row = EnclosureChar.objects.filter(pk=character).values(
+        "family", "frame_component", "pattern"
+    ).first()
+    if not row:
+        return ""
+    candidate = rule_for(row, int(match.group(1)) - 1, int(match.group(2)) - 1)
+    return candidate if candidate in RULES else ""
+
+
 @csrf_exempt
 def api_log(request):
     d = json.loads(request.body)
@@ -322,30 +371,60 @@ def api_log(request):
         mistakes=len(d.get("mistakes", [])),
         completed=d.get("completed", True))
     saved = []
+    rules_by_mistake = {}
     for m in details:
         points = m.get("points", [])
         diagnosis = m.get("diagnosis", "")
         if not re.fullmatch(r"(?:order_[1-9]\d{0,2}_[1-9]\d{0,2}|reversed_[1-9]\d{0,2})", diagnosis):
             diagnosis = ""
-        rule_code = ""
-        order = re.fullmatch(r"order_(\d+)_(\d+)", diagnosis)
-        if order:
-            row = EnclosureChar.objects.filter(pk=ch).values("family", "frame_component", "pattern").first()
-            if row:
-                candidate = rule_for(row, int(order.group(1)) - 1, int(order.group(2)) - 1)
-                if candidate in RULES:
-                    rule_code = candidate
+        rule_code = verified_enclosure_rule(ch, diagnosis)
         habit = m.get("habit", "")
         if rule_code or not re.fullmatch(
-            r"(?:order_(?:horizontal|vertical|diagonal)_before_(?:horizontal|vertical|diagonal)|reversed_(horizontal|vertical|diagonal))",
+            r"(?:order_(?:horizontal|vertical|diagonal)_before_(?:horizontal|vertical|diagonal)|reversed_(?:horizontal|vertical|diagonal))",
             habit,
         ):
             habit = ""
+        stroke_num = int(m.get("stroke", 0) or 0)
+        rules_by_mistake[(stroke_num, diagnosis)] = rule_code
         saved.append(StrokeMistake(
             attempt=a, user=user, character=ch,
-            stroke_num=m["stroke"], board_size=m.get("size", 300),
+            stroke_num=stroke_num, board_size=m.get("size", 300),
             drawn_points=json.dumps(points), diagnosis=diagnosis, habit=habit, rule=rule_code))
     StrokeMistake.objects.bulk_create(saved)
+
+    events = d.get("replay", [])
+    if not isinstance(events, list):
+        events = []
+    if not events:
+        events = [{"stroke": m.get("stroke"), "correct": False,
+                   "points": m.get("points", []), "size": m.get("size", 900),
+                   "diagnosis": m.get("diagnosis", "")}
+                  for m in details if isinstance(m, dict)]
+    traces = []
+    for sequence, event in enumerate(events):
+        if not isinstance(event, dict):
+            continue
+        try:
+            stroke_num = int(event.get("stroke", 0))
+        except (TypeError, ValueError):
+            continue
+        if not 1 <= stroke_num <= 999:
+            continue
+        correct = bool(event.get("correct", False))
+        diagnosis = "" if correct else str(event.get("diagnosis", ""))
+        if not re.fullmatch(r"(?:order_[1-9]\d{0,2}_[1-9]\d{0,2}|reversed_[1-9]\d{0,2})", diagnosis):
+            diagnosis = ""
+        rule_code = "" if correct else rules_by_mistake.get((stroke_num, diagnosis), "")
+        points = event.get("points", [])
+        if not isinstance(points, list):
+            points = []
+        traces.append(StrokeTrace(
+            attempt=a, user=user, character=ch, sequence=sequence,
+            stroke_num=stroke_num, correct=correct,
+            drawn_points=json.dumps(points[:3000]), board_size=event.get("size", 900),
+            diagnosis=diagnosis, rule=rule_code))
+    StrokeTrace.objects.bulk_create(traces)
+
     diagnosis = next((m.diagnosis for m in saved if m.diagnosis), "")
     rule_code = next((m.rule for m in saved if m.rule), "")
     explanation = ""
@@ -354,6 +433,51 @@ def api_log(request):
         explanation = enclosure_fallback(rule_code, chars)
     return JsonResponse({"ok": True, "attempt_id": a.pk, "diagnosis": diagnosis,
                          "rule": rule_code, "rule_explanation": explanation})
+
+
+def replay(request, attempt_id):
+    user = request.GET.get("user", "guest") or "guest"
+    attempt = get_object_or_404(Attempt, pk=attempt_id, user=user)
+    events = []
+    traces = attempt.stroke_traces.all()
+    for trace in traces:
+        try:
+            points = json.loads(trace.drawn_points or "[]")
+        except (TypeError, json.JSONDecodeError):
+            points = []
+        expected_stroke = trace.stroke_num
+        drawn_stroke = trace.stroke_num
+        match = re.fullmatch(r"order_(\d+)_(\d+)", trace.diagnosis or "")
+        if match:
+            expected_stroke, drawn_stroke = (int(value) for value in match.groups())
+        rule_name = RULES.get(trace.rule, {}).get("name", "")
+        if not rule_name and not trace.correct:
+            rule_name = "Stroke direction" if trace.diagnosis.startswith("reversed_") else "Stroke order"
+        events.append({
+            "stroke": trace.stroke_num, "correct": trace.correct,
+            "points": points if isinstance(points, list) else [],
+            "expected_stroke": expected_stroke, "drawn_stroke": drawn_stroke,
+            "rule_name": rule_name,
+        })
+    if not events:
+        for mistake in attempt.stroke_mistakes.order_by("id"):
+            try:
+                points = json.loads(mistake.drawn_points or "[]")
+            except (TypeError, json.JSONDecodeError):
+                points = []
+            expected_stroke = mistake.stroke_num
+            drawn_stroke = mistake.stroke_num
+            match = re.fullmatch(r"order_(\d+)_(\d+)", mistake.diagnosis or "")
+            if match:
+                expected_stroke, drawn_stroke = (int(value) for value in match.groups())
+            rule_name = RULES.get(mistake.rule, {}).get("name", "")
+            if not rule_name:
+                rule_name = "Stroke direction" if mistake.diagnosis.startswith("reversed_") else "Stroke order"
+            events.append({"stroke": mistake.stroke_num, "correct": False,
+                           "points": points if isinstance(points, list) else [],
+                           "expected_stroke": expected_stroke, "drawn_stroke": drawn_stroke,
+                           "rule_name": rule_name})
+    return render(request, "coach/replay.html", {"attempt": attempt, "events": events})
 
 
 @csrf_exempt

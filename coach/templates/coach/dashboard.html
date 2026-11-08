@@ -65,7 +65,7 @@
 
 <h2>Recent practice</h2>
 <section class="card">
- {% for a in attempts %}<div class="example"><b>{{ a.character }}</b> · {{ a.mistakes }} mistake{{ a.mistakes|pluralize }} · {{ a.created|date:"M j, g:i a" }}</div>
+ {% for a in attempts %}<div class="example"><b>{{ a.character }}</b> · {{ a.mistakes }} mistake{{ a.mistakes|pluralize }} · {{ a.created|date:"M j, g:i a" }} · <a href="/replay/{{ a.id }}/?user={{ user|urlencode }}">Replay</a></div>
  {% empty %}<p>No practice attempts yet.</p>{% endfor %}
 </section>
 <a href="/">← Back to practice</a>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Stroke replay · Hanzi Coach</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<style>
+ body{font-family:system-ui,sans-serif;background:#faf6ef;color:#2b2b2b;margin:0;padding:24px;max-width:620px;margin:auto}
+ h1{margin:0 0 4px}.muted{color:#666}.card{background:#fff;border-radius:12px;padding:16px;margin:16px 0}
+ #replaySvg{display:block;width:min(100%,420px);height:auto;margin:auto;background:#fff;border:1px solid #eee;border-radius:10px}
+ .controls{display:flex;gap:10px;align-items:center;justify-content:center;margin:14px}
+ button{padding:9px 16px;border:1px solid #bbb;border-radius:8px;background:#fff;font:inherit;cursor:pointer}
+ #caption{min-height:25px;text-align:center;font-weight:600}
+ #mistakeCaptions{padding-left:24px} #mistakeCaptions li{margin:6px 0}
+ a{color:#b83224}
+</style></head><body>
+<h1>Stroke replay · {{ attempt.character }}</h1>
+<div class="muted">Attempt from {{ attempt.created|date:"M j, g:i a" }} · {{ attempt.mistakes }} mistake{{ attempt.mistakes|pluralize }}</div>
+<section class="card">
+ <svg id="replaySvg" role="img" aria-label="Animated replay of your strokes"></svg>
+ <div class="controls"><button id="playButton" type="button">Replay strokes</button><a href="/dashboard/?user={{ attempt.user|urlencode }}">Back to learning profile</a></div>
+ <div id="caption" aria-live="polite"></div>
+ <ol id="mistakeCaptions"></ol>
+ <div id="emptyReplay" class="muted" hidden>This attempt has no saved stroke paths to replay.</div>
+</section>
+<a href="/">← Back to practice</a>
+{{ attempt.character|json_script:"replay-character" }}
+{{ events|json_script:"replay-events" }}
+<script>
+const ns='http://www.w3.org/2000/svg';
+const character=JSON.parse(document.getElementById('replay-character').textContent);
+const events=JSON.parse(document.getElementById('replay-events').textContent);
+const svg=document.getElementById('replaySvg'),caption=document.getElementById('caption');
+let characterData=null,playToken=0;
+function node(name,attrs={}){const el=document.createElementNS(ns,name);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));return el}
+function pointPairs(points){return (points||[]).map(p=>Array.isArray(p)?[Number(p[0]),Number(p[1])]:[Number(p.x),Number(p.y)]).filter(p=>p.every(Number.isFinite))}
+function addPolyline(group,points,color,width,dash){
+ const pairs=pointPairs(points);if(pairs.length<2)return null;
+ const el=node('polyline',{points:pairs.map(p=>p.join(',')).join(' '),fill:'none',stroke:color,'stroke-width':width,'stroke-linecap':'round','stroke-linejoin':'round','vector-effect':'non-scaling-stroke'});
+ if(dash)el.setAttribute('stroke-dasharray',dash);group.appendChild(el);return el;
+}
+function resetScene(){
+ svg.replaceChildren();const size=Math.min(window.innerWidth-48,360);svg.setAttribute('viewBox',`0 0 ${size} ${size}`);svg.setAttribute('width',size);svg.setAttribute('height',size);
+ const transform=HanziWriter.getScalingTransform(size,size,15).transform;
+ const outline=node('g',{transform}),trace=node('g',{transform});
+ for(const d of characterData.strokes||[])outline.appendChild(node('path',{d,fill:'#e2e0dc',stroke:'none'}));
+ svg.append(outline,trace);return {size,trace};
+}
+function captionMistakes(){
+ const list=document.getElementById('mistakeCaptions');list.replaceChildren();
+ const mistakes=events.filter(e=>!e.correct);
+ for(const e of mistakes){const li=document.createElement('li');const detail=e.expected_stroke&&e.drawn_stroke!==e.expected_stroke?` — stroke ${e.drawn_stroke} came before expected stroke ${e.expected_stroke}`:'';li.textContent=(e.rule_name||'Stroke order')+detail;list.appendChild(li)}
+ document.getElementById('emptyReplay').hidden=events.some(e=>pointPairs(e.points).length>1);
+}
+function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
+async function drawLine(el,duration,token){
+ if(!el)return;
+ const length=el.getTotalLength();el.style.strokeDasharray=length;el.style.strokeDashoffset=length;
+ await new Promise(resolve=>requestAnimationFrame(resolve));if(token!==playToken)return;
+ el.style.transition=`stroke-dashoffset ${duration}ms linear`;el.style.strokeDashoffset='0';await wait(duration);
+ if(token===playToken){el.style.transition='none';el.style.strokeDasharray='none';el.style.strokeDashoffset='0'}
+}
+async function playReplay(){
+ if(!characterData)return;const token=++playToken;const {trace}=resetScene();caption.textContent='';
+ const hasPoints=events.some(e=>pointPairs(e.points).length>1);if(!hasPoints){caption.textContent='No saved stroke paths are available for this attempt.';return}
+ for(const event of events){if(token!==playToken)return;
+   if(!event.correct){caption.textContent=(event.rule_name||'Stroke order')+(event.expected_stroke?' · drew stroke '+(event.drawn_stroke||event.stroke)+' before '+event.expected_stroke:'');
+     const expected=characterData.medians&&characterData.medians[event.expected_stroke-1];
+     if(expected)addPolyline(trace,expected,'#218c45',5,'10 8');
+   }else{caption.textContent='Correct stroke '+event.stroke}
+   const drawn=addPolyline(trace,event.points,event.correct?'#292929':'#c0392b',6,null);
+   await drawLine(drawn,Math.max(180,Math.min(700,pointPairs(event.points).length*9)),token);await wait(280);
+ }
+ caption.textContent='Replay complete';
+}
+async function start(){try{characterData=await HanziWriter.loadCharacterData(character);resetScene();captionMistakes();document.getElementById('playButton').addEventListener('click',playReplay);playReplay()}catch(e){caption.textContent='Could not load the character outline. Check your connection and retry.'}}
+start();
+</script></body></html>
